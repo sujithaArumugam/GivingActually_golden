@@ -1,0 +1,20 @@
+﻿@model GivingActually_May.Models.CampaignsListViewModel
+<ul class="pagination">
+    @for (int i = 1; i <= Model.PageCount; i++)
+    {
+
+        if (i > Model.CurrentPageIndex)
+        {
+            <li>
+                <a href="javascript:PagerClick(@i);">@i</a>
+            </li>
+        }
+        else
+        {
+            <li class="active">
+                <a href="javascript:PagerClick(@i);">@i</a>
+            </li>
+        }
+
+    }
+</ul>

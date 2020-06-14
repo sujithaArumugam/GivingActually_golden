@@ -1,0 +1,196 @@
+﻿@model GivingActually_May.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Sign in Form with Avatar Image</title>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/toastr.js"></script>
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <div class="login-form ">
+        @using (Html.BeginForm("Register", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "msform", role = "form" }))
+        {
+            <div class="avatar" style="align-content:center">
+                <span class="glyphicon glyphicon-user" style="color:white"><small>+</small></span>
+            </div>
+
+            <h2 class="text-center">Create an Account</h2>
+            <p class="text-right"><small>Already have an account?</small> <a href="/Home/Login/" style="color: #18bc9c"><bold>Login</bold> here!</a></p>
+            <hr />
+            <p class="hint-text text-center">Sign up with your social media account or email address</p>
+            <div class="social-btn text-center">
+                <a href="/Home/Facebook/" class="btn btn-primary btn-block btn-lg "><i class="fa fa-facebook"></i> Sign in with <b>Facebook</b></a>
+                <a href="/Home/RedirectToGoogle/" class="btn btn-danger btn-block btn-lg "><i class="fa fa-google"></i> Sign in with <b>Google</b></a>
+            </div>
+            <div class="or-seperator"><i>or</i></div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i><i style="color:red">*</i></span>
+
+                    @Html.TextBoxFor(m => m.DPName, new { @class = "form-control", @placeholder = "Full Name", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.DPName, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i><i style="color:red">*</i></span>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "EmailId", @required = "required", @type = "email" })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i><i style="color:red">*</i></span>
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @type = "password", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-check"></i><i style="color:red">*</i>
+                    </span>
+                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @type = "password", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <p><h4 style="color:red">@ViewBag.RegisterMessage</h4></p>
+            </div>
+            <div class="form-group">
+                <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-lg btn-block signup-btn">Sign Up</button>
+            </div>
+
+        }
+
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        toastr.options = {
+
+            tapToDismiss: true,
+
+            // toast class
+            toastClass: 'toast',
+
+            // container ID
+            containerId: 'toast-container',
+
+            // debug mode
+            debug: false,
+
+            // fadeIn, slideDown, and show are built into jQuery
+            showMethod: 'fadeIn',
+
+            // duration of animation
+            showDuration: 300,
+
+            // easing function
+            showEasing: 'swing',
+
+            // callback function
+            onShown: undefined,
+            onHidden: undefined,
+
+            // hide animation
+            hideMethod: 'fadeOut',
+
+            // duration of animation
+            hideDuration: 1000,
+
+            // easing function
+            hideEasing: 'swing',
+
+            // close animation
+            closeMethod: false,
+
+            // duration of animation
+            closeDuration: false,
+
+            // easing function
+            closeEasing: false,
+
+            // timeout in ms
+            extendedTimeOut: 1000,
+
+            // you can customize icons here
+            iconClasses: {
+                error: 'toast-error',
+                info: 'toast-info',
+                success: 'toast-success',
+                warning: 'toast-warning'
+            },
+            iconClass: 'toast-info',
+
+            // toast-top-center, toast-bottom-center, toast-top-full-width
+            // toast-bottom-full-width, toast-top-left, toast-bottom-right
+            // toast-bottom-left, toast-top-right
+            positionClass: 'toast-top-right',
+
+            // set timeOut and extendedTimeOut to 0 to make it sticky
+            timeOut: 5000,
+
+            // title class
+            titleClass: 'toast-title',
+
+            // message class
+            messageClass: 'toast-message',
+
+            // allows HTML content in the toast?
+            escapeHtml: false,
+
+            // target container
+            target: 'body',
+
+            // close button
+            closeHtml: '<button type="button">&times;</button>',
+
+            // place the newest toast on the top
+            newestOnTop: true,
+
+            // revent duplicate toasts
+            preventDuplicates: false,
+
+            // shows progress bar
+            progressBar: false
+
+        };
+
+        //$('#toastr-success').click(function () {
+        //    toastr.success('This is a success notification from toastr.')
+        //});
+
+        //$('#toastr-info').click(function () {
+        //    toastr.info('This is an information notification provided by toastr.')
+        //});
+
+        //$('#toastr-warning').click(function () {
+        //    toastr.warning('This is a warning notification provided by toastr.')
+        //});
+
+        //$('#toastr-error').click(function () {
+        //    toastr.error('This is an error notification provided by toastr.')
+        //});
+    });
+
+</script>

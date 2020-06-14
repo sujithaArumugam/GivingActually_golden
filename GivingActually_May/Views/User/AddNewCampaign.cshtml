@@ -1,0 +1,287 @@
+﻿@model GivingActually_May.Models.CampaignMainViewModel
+
+@{
+    ViewBag.Title = "AddNewCampaign";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+  
+    
+</style>
+<h4 class=" text-center " style="color:#18bc9c">Add New Campaign</h4>
+
+
+<body>
+    <ul id="progressbar">
+        <li class="active" id="account"><strong>Campaign Details</strong></li>
+        <li  id="personal"><strong>Campaign Display</strong></li>
+        <li id="confirm"><strong>Campaign Story</strong></li>
+
+
+    </ul>
+
+
+    <div class="user-form">
+        @using (Html.BeginForm("AddNewCampaign", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+        {
+
+
+            <h2>
+                About your Campaign
+                <small>Fill to let people know more about your fundraising Campaign</small>
+            </h2>
+
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.UserId)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.CampaignTarget.Id)
+            @Html.HiddenFor(model => model.CampainOrganizer.Id)
+
+            <div class="form-group">
+
+                <div class="text-center">
+                    @Html.LabelFor(model => model.CampaignTargetMoney)
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 col-md-3 col-sm-3">
+                        @Html.DropDownListFor(model => model.CampaignTargetMoneyType, EnumHelper.GetSelectList(typeof(GivingActually_May.Models.HelperModels.Helper.MoneyType)), new { @class = "form-control mType", onChange = "OnMoneyTypeChanged(this)" })
+                        @Html.ValidationMessageFor(model => model.CampaignTargetMoneyType, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-9 col-md-9 col-sm-9">
+                        <div class="input-group currencysymbol">
+                            @if (@Model.CampaignTargetMoneyType == "0")
+                            {
+
+                                <span class="input-group-addon"><span><i style="color: green ">&#8364;</i><i style="color:red">*</i></span></span>
+                            }
+                            else
+                            {
+
+                                <span class="input-group-addon"><span><i style="color: green "> &#8377;</i><i style="color:red">*</i></span></span>
+                            }
+                            @Html.EditorFor(model => model.CampaignTargetMoney, new { htmlAttributes = new { @class = "form-control moneyVal", @type = "number", @min = "2000", @max = "50000000", @placeholder = "Enter the Amount here", @required = "required" } })
+
+                            @Html.ValidationMessageFor(model => model.CampaignTargetMoney, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="row">
+                    @Html.LabelFor(model => model.CampaignTitle, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.CampaignTitle, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @placeholder = "Campaign Title", @required = "required", @onkeyup = "textCounter(this,'counter',50);" } })
+
+                        @Html.ValidationMessageFor(model => model.CampaignTitle, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2">
+                        <input disabled maxlength="3" size="1" value="50" id="counter" style="font-size:x-small;  height:15px;">
+                        <label style="font-size:xx-small;">Remaining</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    @Html.LabelFor(model => model.StoryCategory, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.StoryCategory, EnumHelper.GetSelectList(typeof(GivingActually_May.Models.HelperModels.Helper.StoryCategory)), "Select", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.StoryCategory, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    @Html.LabelFor(model => model.BeneficiaryType, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.BeneficiaryType, EnumHelper.GetSelectList(typeof(GivingActually_May.Models.HelperModels.Helper.BeneficiaryType)), new { @class = "form-control", onChange = "OnTypeChanged(this)" })
+                        @Html.ValidationMessageFor(model => model.BeneficiaryType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            if ((Model.Id > 0 && (Model.BeneficiaryType.GetHashCode() == 1 || Model.BeneficiaryType.GetHashCode() == 3 || Model.BeneficiaryType.GetHashCode() == 5)))
+            {
+                <div class="col-md-12 classIndividual">
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.BName, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.BName, new { htmlAttributes = new { @class = "form-control", @maxlength = "50" } })
+                                @Html.ValidationMessageFor(model => model.BName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if ((Model.Id == 0))
+            {<div class="col-md-12 classIndividual" style="display:none">
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.BName, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.BName, new { htmlAttributes = new { @class = "form-control", @maxlength = "50" } })
+                                @Html.ValidationMessageFor(model => model.BName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>}
+
+            if ((Model.Id > 0 && (Model.BeneficiaryType.GetHashCode() == 2 || Model.BeneficiaryType.GetHashCode() == 4 )))
+            {
+                <div class="col-md-12 classGroup">
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.BGroupName, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.BGroupName, new { htmlAttributes = new { @class = "form-control", @maxlength = "50" } })
+                                @Html.ValidationMessageFor(model => model.BGroupName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if ((Model.Id == 0))
+            {
+                <div class="col-md-12 classGroup" style="display:none">
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.BGroupName, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.BGroupName, new { htmlAttributes = new { @class = "form-control", @maxlength = "50" } })
+                                @Html.ValidationMessageFor(model => model.BGroupName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            if ((Model.Id > 0 && (Model.BeneficiaryType.GetHashCode() == 6 )))
+            {
+                <div class="col-md-12 classGroup">
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.NGOName, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.NGOName, new { htmlAttributes = new { @class = "form-control", @maxlength = "50" } })
+                                @Html.ValidationMessageFor(model => model.NGOName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if ((Model.Id == 0))
+            {
+                <div class="col-md-12 classNGO" style="display:none">
+                    <div class="form-group">
+                        <div class="row">
+                            @Html.LabelFor(model => model.NGOName, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.NGOName, new { htmlAttributes = new { @class = "form-control", @maxlength = "50" } })
+                                @Html.ValidationMessageFor(model => model.NGOName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="form-group text-center">
+
+                <input type="submit" value=@(Model.Id == 0 ? "Save And Continue" : "Update") class="btn btn-success btn-lg btn-outline-danger" />
+            </div>
+        }
+
+    </div>
+</body>
+<script>
+    var searchInput = 'search_input';
+
+    $(document).ready(function () {
+        var autocomplete;
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+            types: ['geocode'],
+        });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var near_place = autocomplete.getPlace();
+            alert(near_place.geometry.location.lat())
+            document.getElementById('loc_lat').value = near_place.geometry.location.lat();
+            document.getElementById('loc_long').value = near_place.geometry.location.lng();
+
+            document.getElementById('latitude_view').innerHTML = near_place.geometry.location.lat();
+            document.getElementById('longitude_view').innerHTML = near_place.geometry.location.lng();
+        });
+
+        $("input[type='file']").on("change", function () {
+            if (this.files[0].size > 2000000) {
+                alert("Please upload file less than 2MB. Thanks!!");
+                $(this).val('');
+            }
+        });
+
+    });
+    function textCounter(field, field2, maxlimit) {
+        var countfield = document.getElementById(field2);
+        if (field.value.length > maxlimit) {
+            field.value = field.value.substring(0, maxlimit);
+            return false;
+        } else {
+            countfield.value = maxlimit - field.value.length;
+        }
+    }
+
+    function OnTypeChanged(_this) {
+        var selectedValue = $(_this).val();
+        if (selectedValue == 2 || selectedValue == 4 ) {
+            hide(document.querySelectorAll('.classNGO'));
+            hide(document.querySelectorAll('.classIndividual'));
+            show(document.querySelectorAll('.classGroup'));
+
+        }
+        if (selectedValue == 6) {
+            hide(document.querySelectorAll('.classIndividual'));
+            hide(document.querySelectorAll('.classGroup'));
+            show(document.querySelectorAll('.classNGO'));
+        }
+        if (selectedValue == 1 || selectedValue == 3 || selectedValue == 5) {
+            hide(document.querySelectorAll('.classNGO'));
+            hide(document.querySelectorAll('.classGroup'));
+            show(document.querySelectorAll('.classIndividual'));
+
+        }
+
+        if (selectedValue == 0) {
+            hide(document.querySelectorAll('.classNGO'));
+            hide(document.querySelectorAll('.classIndividual'));
+            hide(document.querySelectorAll('.classGroup'));
+
+        }
+
+
+    }
+
+    function hide(elements) {
+        elements = elements.length ? elements : [elements];
+        for (var index = 0; index < elements.length; index++) {
+            elements[index].style.display = 'none';
+        }
+    }
+
+    function show(elements, specifiedDisplay) {
+        elements = elements.length ? elements : [elements];
+        for (var index = 0; index < elements.length; index++) {
+            elements[index].style.display = specifiedDisplay || 'block';
+        }
+    }
+    function OnMoneyTypeChanged(_this) {
+        var selectedValue = $(_this).val();
+        if (selectedValue == 0) {
+            $('.currencysymbol .input-group-addon span').html("<i style='color: green'>&#8364;</i><i style='color: red'>*</i>");
+        }
+        else {
+            $('.currencysymbol .input-group-addon span').html("<i style='color: green'>&#8377;</i><i style='color: red'>*</i>");
+        }
+    }
+</script>

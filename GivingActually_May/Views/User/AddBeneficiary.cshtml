@@ -1,0 +1,290 @@
+﻿@model GivingActually_May.Models.CampaignMainViewModel
+
+@{
+    ViewBag.Title = "Add Campaign Beneficiary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    /*body {
+        color: #fff;
+        background: #9e9e9e;
+        font-family: 'Open Sans', sans-serif;
+    }*/
+
+   
+</style>
+<h4 class=" text-center">Add New Campaign</h4>
+
+
+<body>
+    <ul id="progressbar">
+        <li class="active" id="account"><strong>Campaign Details</strong></li>
+        <li class="active" id="personal"><strong>Campaign Display</strong></li>
+        <li id="confirm"><strong>Campaign Story</strong></li>
+
+
+    </ul>
+
+
+    <div class="user-form">
+        @using (Html.BeginForm("AddBeneficiary", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+        {
+            <h2>
+                About your Campaign
+               
+            </h2>
+             <small>Fill to let people know more about your fundraising Campaign</small>
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.CampainOrganizer.Id)
+            @Html.HiddenFor(model => model.UserId)
+            <input type="hidden" name="Organizer" id="CampainOrganizer_Id" value="@Model.CampainOrganizer.Id" />
+            <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+
+            <div class="row">
+                @if (Model.CampainOrganizer.BDisplayPic == null)
+                {
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.CampainOrganizer.BDisplayPic, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            <div style="width:80px">
+                                <img id="user_img"
+                                     margin-left="0px"
+                                     margin-right="180px"
+                                     height="100"
+                                     width="90"
+                                     style="border:solid; padding:2px; margin-left:1px;" />
+                            </div>
+                            <input type="file" class="form-control" name="file2" id="BDisplayPic" style="width: 100%;" accept=".png,.jpg,.jpeg,.gif,.tif" filesize="10" onchange="showIMG(this)" required /> <br />
+                            @Html.ValidationMessageFor(model => model.CampainOrganizer.BDisplayPic, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.CampainOrganizer.BDisplayPic, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            <div style="width:80px">
+
+
+                                @{
+                                    var getImage = System.Convert.ToBase64String(Model.CampainOrganizer.BDisplayPic);
+                                    var Picture = string.Format("data:image/JPG;base64 , {0}", getImage);
+
+                                    <img id="BDisplayPic"
+                                         margin-left="0px"
+                                         margin-right="180px"
+                                         height="100"
+                                         width="90"
+                                         style="border:solid; padding:2px; margin-left:1px;" src="@Url.Content(Picture)" ; alt="" ;height="200" ;width="280" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            @*<div class="form-group">
+                    <div class="row">
+                        @Html.LabelFor(model => model.CampainOrganizer.CountryId, htmlAttributes: new { @class = "control-label col-md-4 ", @id = "residence" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.CampainOrganizer.CountryId, Model.CampainOrganizer.AvailableCountries, new { @class = "form-control", onChange = "OnCountryChanged(this)" })
+                            @Html.ValidationMessageFor(model => model.CampainOrganizer.CountryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        @Html.LabelFor(model => model.CampainOrganizer.BPinCode, htmlAttributes: new { @class = "control-label col-md-4 " })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.CampainOrganizer.BPinCode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CampainOrganizer.BPinCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>*@
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyB5_Aj7tmIdl_z8qBnVnvBVNZsBTRMdlZY"></script>
+
+
+            <div class="form-group">
+                <div class="row">
+                    @Html.LabelFor(model => model.CampainOrganizer.placeNmae, htmlAttributes: new { @class = "control-label col-md-4 " })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.CampainOrganizer.placeNmae, new { htmlAttributes = new { @class = "form-control", id = "search_input", @placeholder = "Type address..." } })
+                        @Html.ValidationMessageFor(model => model.CampainOrganizer.placeNmae, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.CampainOrganizer.Latitude, new { htmlAttributes = new { @id = "loc_lat" } })
+                        @Html.HiddenFor(model => model.CampainOrganizer.longitude, new { htmlAttributes = new { @id = "loc_long" } })
+                    </div>
+                </div>
+                @* <input type="text" class="form-control" id="search_input" placeholder="Type address..." />*@
+                @*<input type="hidden" id="loc_lat" />
+                    <input type="hidden" id="loc_long" />*@
+                <div class="latlong-view">
+                   
+
+                    @Html.EditorFor(m => m.Latitude, new { htmlAttributes = new { @hidden = "true" } })
+                    @Html.EditorFor(m => m.Longitude, new { htmlAttributes = new { @hidden = "true" } })
+                    @*<p><b>Longitude:</b> <span id="Longitude"></span></p>*@
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+
+                <input type="submit" value=@(Model.Id == 0 ? "Save And Continue" : "Update") class="btn btn-success btn-lg btn-outline-danger" />
+            </div>
+            <div class="form-group text-center">
+                @if (Model.Id > 0)
+                {
+                    <a class="action-button-previous" href='/User/AddNewCampaign/?Id=@Model.Id'>Back</a>
+                }
+            </div>
+        }
+
+    </div>
+</body>
+
+
+
+<script type="text/javascript">
+    var searchInput = 'search_input';
+
+    $(document).ready(function () {
+        var autocomplete;
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+            types: ['geocode'],
+        });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var near_place = autocomplete.getPlace();
+           // alert(near_place.geometry.location.lat())
+            
+
+            //document.getElementById('latitude_view').innerHTML = near_place.geometry.location.lat();
+            //document.getElementById('Longitude').innerHTML = near_place.geometry.location.lng();
+            document.getElementById('Longitude').value = near_place.geometry.location.lng();
+            document.getElementById('Latitude').value = near_place.geometry.location.lat();
+        });
+
+        $("input[type='file']").on("change", function () {
+            if (this.files[0].size > 2000000) {
+                alert("Please upload file less than 2MB. Thanks!!");
+                $(this).val('');
+            }
+        });
+
+    });
+    function showIMG(input) {
+        if (input.files && input.files[0]) {
+
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function OnTypeChanged(_this) {
+        var selectedValue = $(_this).val();
+        $("#BAgeVal").val("");
+        $("#BAgeVal-error").hide();
+        if (selectedValue == 2 || selectedValue == 4 || selectedValue == 6) {
+
+            hide(document.querySelectorAll('.classIndividualOnly'));
+            show(document.querySelectorAll('.classGroup'));
+
+        }
+        if (selectedValue == 0 || selectedValue == 1 || selectedValue == 3) {
+
+            hide(document.querySelectorAll('.classGroup'));
+            show(document.querySelectorAll('.classIndividualOnly'));
+
+        }
+
+        if (selectedValue == 0) {
+            hide(document.querySelectorAll('.classRelationship'));
+            $("#BAgeVal").attr({
+                "min": 18          // values (or variables) here
+            });
+        }
+        else {
+            $("#BAgeVal").removeAttr("min");
+        }
+
+        if (selectedValue == 1 || selectedValue == 2 || selectedValue == 5) {
+
+            show(document.querySelectorAll('.classRelationship'));
+        }
+        else {
+            hide(document.querySelectorAll('.classRelationship'));
+        }
+    }
+    function OnCountryChanged(_this) {
+
+        var selectedValue = $(_this).val();
+        $("#State").empty();
+
+    $.ajax({
+
+        type: 'POST',
+
+        url: '@Url.Action("GetStates")',
+        dataType: 'json',
+        data: { id: selectedValue },
+        success: function (subcategories) {
+
+            $.each(subcategories, function (i, subcategory) {
+
+                $("#State").append('<option value="'
+                    + subcategory.Value + '">' +
+                    subcategory.Text + '</option>');
+            });
+        },
+        error: function (ex) {
+            alert('Failed to retrieve Sub Categories : ' + ex);
+        }
+    });
+    return false;
+    }
+    function OnStateChanged(_this) {
+
+        var selectedValue = $(_this).val();
+        $("#city").empty();
+    $.ajax({
+
+        type: 'POST',
+
+        url: '@Url.Action("GetCity")',
+        dataType: 'json',
+        data: { id: selectedValue },
+        success: function (subcategories) {
+            $.each(subcategories, function (i, subcategory) {
+
+                $("#city").append('<option value="'
+                    + subcategory.Value + '">' +
+                    subcategory.Text + '</option>');
+            });
+        },
+        error: function (ex) {
+            alert('Failed to retrieve Sub Categories : ' + ex);
+        }
+    });
+    return false;
+    }
+    function hide(elements) {
+        elements = elements.length ? elements : [elements];
+        for (var index = 0; index < elements.length; index++) {
+            elements[index].style.display = 'none';
+        }
+    }
+
+    function show(elements, specifiedDisplay) {
+        elements = elements.length ? elements : [elements];
+        for (var index = 0; index < elements.length; index++) {
+            elements[index].style.display = specifiedDisplay || 'block';
+        }
+    }
+</script>
+

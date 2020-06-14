@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d9cbc282b57c42db837e9774001e59d2" Name="Diagram1">
+        <EntityTypeShape EntityType="GivingActuallyModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.City" Width="1.5" PointX="12.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_Beneficiary" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_BeneficiaryDetails" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_Campaign" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_CampaignDescription" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_CampaignDescriptionUpdates" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_CampaignDonation" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_CampaignTarget" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_CityDetails" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_Countries" Width="1.5" PointX="7.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_GeoLocation" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_Like" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_ParentComment" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_PinCodeDetails" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_States" Width="1.5" PointX="10" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_Stories" Width="1.5" PointX="3" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_StoriesAttachment" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_Target" Width="1.5" PointX="5.25" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_UpdatesAttachment" Width="1.5" PointX="5.25" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_User" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GivingActuallyModel.Tbl_UserAuthentication" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="GivingActuallyModel.FK_Cities_States" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_Like_Story" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_ParentComment_Story" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_Tbl_Attachment_Tbl_Campaign" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_Tbl_Campaign_Tbl_Campaign" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_Tbl_CampaignDonation_Tbl_Campaign" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_Tbl_StoriesAttachment_Tbl_Campaign" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_ctry_cities" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_States_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_Like_user" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_parent_user" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_Tbl_CTarget_Tbl_Stories" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_Tbl_Stories_Tbl_Stories" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_Tbl_Target_Tbl_Stories" ManuallyRouted="false" />
+        <AssociationConnector Association="GivingActuallyModel.FK_Tbl_Targettt_Tbl_Stories" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

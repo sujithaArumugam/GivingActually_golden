@@ -1,0 +1,276 @@
+﻿@model GivingActually_May.Models.CampaignsListViewModel
+
+
+@{
+    ViewBag.Title = "Home";
+
+}
+<div id="myCarousel" class="carousel slide">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="fill" style="background-image:url('../../Images/sailboat.jpg')"></div>
+            <div class="carousel-caption">
+                <h1 class="car-header">
+                    @Html.ActionLink("Donate Now", "AllCampaigns", "Home", htmlAttributes: new { @class = "btn btn-success" })
+                    <a href="/User/AddNewCampaign" class="btn btn-success">Start Campaign</a>
+                </h1>
+                <h2>
+                    Giving is not just about making a donation. It is about making a difference.
+                    <small>- Kathy Calvin</small>
+                </h2>
+
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image:url('../../Images/woods.jpg');"></div>
+            <div class="carousel-caption">
+                <h1 class="car-header">
+                    @Html.ActionLink("Donate Now", "AllCampaigns", "Home", htmlAttributes: new { @class = "btn btn-success" })
+                    <a href="/User/AddNewCampaign" class="btn btn-success">Start Campaign</a>
+                </h1>
+                <h2>
+                    Small acts, when multiplied by millions of people, can transform the world
+                    <small>-Howard Zinn</small>
+                </h2>
+
+            </div>
+        </div>
+        @*<div class="item">
+                <div class="fill" style="background-image:url('../../Images/j.jpg');"></div>
+                <div class="carousel-caption">
+                    <h1 class="car-header">
+                        @Html.ActionLink("Donate Now", "AllCampaigns", "Home", htmlAttributes: new { @class = "btn btn-success" })
+                        <a href="/User/AddNewCampaign" class="btn btn-success">Start Campaign</a>
+                    </h1>
+                    <h2>
+                        Thank You for joining God in his work in this world.
+                    </h2>
+
+                </div>
+            </div>*@
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <h3 class="text-center">Campaigning</h3>
+                <p>Spend less than 5 minutes to Fill in a few details about yourself, and who you are fundraising for -    <a href='/User/AddNewCampaign/'>here</a> </p>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h3 class="text-center">Sharing</h3>
+                <p>Receive donations from people across the world, by sharing the newly created campaign to the social media Sites</p>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h3 class="text-center">Crowdfunding</h3>
+                <p>Transfer funds to the hospital or to your bank account, whenever you need.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section-colored text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Top Campaigns Today!</h2>
+                <hr>
+            </div>
+
+            @if (Model.CampaignViewModelList.Any())
+            {
+                int i = 0;
+
+                foreach (var item in Model.CampaignViewModelList)
+                {
+                    i = i + 1;
+                    <div class="col-md-4  portfolio-item">
+                        <div class="div_topCampaignss">
+
+                            <h4 class="cam_card-header">@item.CampaignTitle</h4>
+
+
+                            <a href='/Home/CampaignView/?Id=@item.Id'>
+                                <p style="" class="text-center">
+                                    @if (item.CampainOrganizer.BDisplayPic != null)
+                                    {
+                                        var getImage = System.Convert.ToBase64String(item.CampainOrganizer.BDisplayPic);
+                                        var Picture = string.Format("data:image/JPG;base64 , {0}", getImage);
+
+                                        <img class="lazy cam-card-image img-responsive" src="~/Images/placeholder.png" data-src="@Url.Content(Picture)" alt="@item.CampainOrganizer.BDisplayPicName">
+                                        <meta property="og:image" content="@Url.Content(Picture)" />
+                                    }
+                                    else
+                                    {<img id="user_img"
+                                          margin-left="0px"
+                                          margin-right="180px"
+                                          class="cam-card-image img-responsive" />
+                                    }
+
+                                </p>
+
+                            </a>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-left">
+                                    <span>
+                                        <i class="glyphicon glyphicon-tag icon_tag">
+                                        </i><label style="font-size:12px"> @item.CategoryName</label>
+                                    </span>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                    <span>
+                                        <i class="glyphicon glyphicon-map-marker icon_tag">
+                                        </i><label class="text-left" style="font-size:12px;width:100px">
+                                            @(String.Format("{0}", item.CampainOrganizer.placeNmae))
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="text-center cam-desc">
+                                <p>@(String.Format("{0}{1}", item.campaignDescription != null ? (item.campaignDescription.StoryDescription != null ? item.campaignDescription.StripedDescription.Substring(0, item.campaignDescription.StripedDescription.Length > 75 ? 75 : item.campaignDescription.StripedDescription.Length) : "") : "", "....."))</p>
+                            </div>
+                            <p class="text-center cam-desc-more">
+
+                                <a href='/Home/CampaignView/?Id=@item.Id'>Read More</a>
+                                @*<div class="row">
+                                        <div class=" col-md-6 text-center">
+                                            <a href='/Home/CampaignView/?Id=@item.Id' class=" btn btn-default  text-center">Read More</a>
+                                        </div>
+                                        <div class=" col-md-6 text-center">
+                                            <a href='/Home/CampaignView/?Id=@item.Id' class="btn btn-success  text-center">Donate Now</a>
+                                        </div>
+                                    </div>*@
+                            </p>
+
+                            <div class="text-center prog_div">
+
+                                <div class="row">
+                                    <div class=" col-md-6 text-left">
+                                        <span class="prog_desc">Raised: &nbsp;&nbsp; &nbsp;&nbsp;<bold>@Model.CurrencyCode <span style="font-weight:bolder">@item.RaisedAmount</span> </bold> </span>
+                                    </div>
+                                    <div class=" col-md-6 text-right">
+                                        <span class="prog_desc">Goal: &nbsp;&nbsp; &nbsp;&nbsp;<bold>@Model.CurrencyCode <span style="font-weight:bolder">@Math.Round(item.CampaignTargetMoney)</span> </bold></span>
+                                    </div>
+                                </div>
+                                <div class="progress prog_main">
+                                    <div class="progress-bar progress-bar-striped bg-success active" role="progressbar" style="width: @item.RaisedPercentage%; background-color:#18bc9c" aria-valuenow=@item.RaisedPercentage aria-valuemin="0" aria-valuemax="100"><span title="@item.RaisedPercentage% Raised"></span></div>
+
+
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    if (i == 6)
+                    {
+                        break;
+                    }
+                }
+
+            }
+            else
+            {<p>No records Found</p>}
+        </div>
+    </div>
+</div>
+
+
+
+<div class="section-colored" >
+
+    <div class="row ">
+
+        <div class="col-lg-2 col-md-2 col-md-offset-10">
+
+            <div class="div-center"> <p><a href='/Home/AllCampaigns/' class="btn  btn-success">Get More Campaigns &raquo;</a></p></div>
+
+        </div>
+    </div>
+</div>
+<hr />
+<div class="section">
+    <div class="container">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <video width="400" style="padding-top:2em;" class="videofile text-center" controls preload="none">
+                        <source src="~/Videos/VID-20200416-WA0005.mp4" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h2> OUR MISSION</h2>
+                    <p>
+                        We dream about a new world for the children with no harm. We are aiming to build a strong and a bouncing platform where anyone can work for children worldwide.
+
+                        Together, we're going to make the future of the children where we are able to fulfill all of their requirements to keep them safe from withered world. We have already stepped out and start changing the world. Keeping safe them from war, inhumanity, Child labor, child abuse and more what we feel harmful for them.
+                    </p>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.container -->
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+        let active = false;
+
+        const lazyLoad = function () {
+            if (active === false) {
+                active = true;
+
+                setTimeout(function () {
+                    lazyImages.forEach(function (lazyImage) {
+                        if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.remove("lazy");
+
+                            lazyImages = lazyImages.filter(function (image) {
+                                return image !== lazyImage;
+                            });
+
+                            if (lazyImages.length === 0) {
+                                document.removeEventListener("scroll", lazyLoad);
+                                window.removeEventListener("resize", lazyLoad);
+                                document.removeEventListener("mousemove", lazyLoad);
+                                window.removeEventListener("orientationchange", lazyLoad);
+                            }
+                        }
+                    });
+
+                    active = false;
+                }, 200);
+            }
+        };
+
+        document.addEventListener("scroll", lazyLoad);
+        window.addEventListener("resize", lazyLoad);
+        document.addEventListener("mousemove", lazyLoad);
+        window.addEventListener("orientationchange", lazyLoad);
+    });
+</script>

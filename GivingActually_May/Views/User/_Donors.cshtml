@@ -1,0 +1,32 @@
+﻿@model GivingActually_May.Models.CampaignMainViewModel
+<style>
+</style>
+
+@*<p><span class="glyphicon glyphicon-hand-up"> Donors<sup>@Model.RaisedBy</sup></span></p>*@
+<div class="text-center pop">
+    <a data-toggle="modal" data-target="#dnrModal"><bold>@Model.RaisedBy</bold> </a>
+    <a data-toggle="modal" data-target="#dnrModal"><h5 class="counter-title">Donors</h5></a>
+</div>
+<div id="dnrModal" class="modal fade" role="dialog">
+    <div class="col-md-12 col-sm-12">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title panel-heading">Donors</h4>
+                </div>
+                <div class="modal-body">
+                    @{
+                        Html.RenderPartial("_DonorsList", Model);
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

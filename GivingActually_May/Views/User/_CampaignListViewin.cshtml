@@ -1,0 +1,139 @@
+﻿@model GivingActually_May.Models.CampaignsListViewModel
+
+@if (Model.CampaignViewModelList.Any())
+{
+    int i = 0;
+    foreach (var item in Model.CampaignViewModelList)
+    {
+        i = i + 1;
+
+
+        <div class="col-md-4  portfolio-item">
+            <div class="div_topCampaignss">
+
+                <h4 class="cam_card-header">@item.CampaignTitle</h4>
+
+
+                <a href='/User/CampaignView/?Id=@item.Id'>
+                    <p style="" class="text-center">
+                        @if (item.CampainOrganizer.BDisplayPic != null)
+                        {
+                            var getImage = System.Convert.ToBase64String(item.CampainOrganizer.BDisplayPic);
+                            var Picture = string.Format("data:image/JPG;base64 , {0}", getImage);
+
+                            @*if (i > 6)
+                            {
+                                <img class="lazy cam-card-image img-responsive" src="~/Images/placeholder.png" data-src="@Url.Content(Picture)" alt="@item.CampainOrganizer.BDisplayPicName">
+                            }
+                            else*@
+                            {
+                                <img class="cam-card-image img-responsive" src="@Url.Content(Picture)" alt="@item.CampainOrganizer.BDisplayPicName">
+
+                            }
+                        }
+                        else
+                        {<img id="user_img"
+                              margin-left="0px"
+                              margin-right="180px"
+                              class="cam-card-image img-responsive" />
+                        }
+                    </p>
+                </a>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-xs-6 text-left">
+                        <span>
+                            <i class="glyphicon glyphicon-tag icon_tag">
+                            </i><label style="font-size:12px"> @item.CategoryName</label>
+                        </span>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                        <span>
+                            <i class="glyphicon glyphicon-map-marker icon_tag">
+                            </i><label class="text-left" style="font-size:12px;width:100px">
+                                @(String.Format("{0}", item.CampainOrganizer.placeNmae))
+                            </label>
+                        </span>
+                    </div>
+                </div>
+                <div class="text-center cam-desc">
+                    <p>@(String.Format("{0}{1}", item.campaignDescription != null ? (item.campaignDescription.StoryDescription != null ? item.campaignDescription.StripedDescription.Substring(0, item.campaignDescription.StripedDescription.Length > 75 ? 75 : item.campaignDescription.StripedDescription.Length) : "") : "", "....."))</p>
+                </div>
+                <p class="text-center cam-desc-more">
+
+                    <a href='/User/CampaignView/?Id=@item.Id'>Read More</a>
+                    @*<div class="row">
+                            <div class=" col-md-6 text-center">
+                                <a href='/Home/CampaignView/?Id=@item.Id' class=" btn btn-default  text-center">Read More</a>
+                            </div>
+                            <div class=" col-md-6 text-center">
+                                <a href='/Home/CampaignView/?Id=@item.Id' class="btn btn-success  text-center">Donate Now</a>
+                            </div>
+                        </div>*@
+                </p>
+
+                <div class="text-center prog_div">
+                    <div class="row">
+                        <div class=" col-md-6 text-left">
+                            <span class="prog_desc">Raised: &nbsp;&nbsp; <bold>@Model.CurrencyCode <span style="font-weight:bolder">@item.RaisedAmount</span> </bold> </span>
+                        </div>
+                        <div class=" col-md-6 text-right">
+                            <span class="prog_desc">Goal: &nbsp;&nbsp; <bold>@Model.CurrencyCode <span style="font-weight:bolder">@Math.Round(item.CampaignTargetMoney)</span> </bold></span>
+                        </div>
+                    </div>
+                    <div class="progress prog_main">
+                        <div class="progress-bar progress-bar-striped bg-success active" role="progressbar" style="width: @item.RaisedPercentage%; background-color:#18bc9c" aria-valuenow=@item.RaisedPercentage aria-valuemin="0" aria-valuemax="100"><span title="@item.RaisedPercentage% Raised"></span></div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+    }
+}
+else
+{<p>No records Found</p>}
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+        let active = false;
+
+        const lazyLoad = function () {
+            if (active === false) {
+                active = true;
+
+                setTimeout(function () {
+                    lazyImages.forEach(function (lazyImage) {
+                        if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.remove("lazy");
+
+                            lazyImages = lazyImages.filter(function (image) {
+                                return image !== lazyImage;
+                            });
+
+                            if (lazyImages.length === 0) {
+                                document.removeEventListener("scroll", lazyLoad);
+                                document.removeEventListener("mousemove", lazyLoad);
+                                window.removeEventListener("resize", lazyLoad);
+                                window.removeEventListener("orientationchange", lazyLoad);
+                            }
+                        }
+                    });
+
+                    active = false;
+                }, 20);
+            }
+        };
+
+        document.addEventListener("scroll", lazyLoad);
+        document.addEventListener("mousemove", lazyLoad);
+        window.addEventListener("resize", lazyLoad);
+        window.addEventListener("orientationchange", lazyLoad);
+    });
+</script>

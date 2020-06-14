@@ -1,0 +1,16 @@
+﻿@model GivingActually_May.Models.CampaignMainViewModel
+@if (Model.campaignDescription.Id != 0)
+{
+    <div class="editor-field">
+
+        <ul class="attachment">
+            @foreach (var item in Model.Files)
+            {
+            <li>
+                <a class="title" href="/User/Download/?p=@(item.AttId)&d=@Model.Id">@item.FileName</a>
+                <button  type="button" title="Delete Attachement" onclick="RemoveAttachement(@item.AttId,@Model.Id)">X</button>
+            </li>
+            }
+        </ul>
+    </div>
+}

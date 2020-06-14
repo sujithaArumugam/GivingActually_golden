@@ -1,0 +1,38 @@
+﻿
+
+<meta name="viewport" content="width=device-width">
+
+<form action="/Home/Charge" method="POST" class="payment-form text-center">
+    @*<article>
+            <label>Amount: $5.00</label>
+        </article>
+        <script src="//checkout.stripe.com/v2/checkout.js"
+                class="stripe-button"
+                data-key="pk_test_M83YFoHr4MmdF4u4JE8tciw300qoKnvlKT"
+                data-locale="auto"
+                data-description="Sample Charge"
+                data-amount="500">
+        </script>*@
+
+    <p class="text-center">
+        Please do not refresh the page and click below to
+        process your payment. This can take only a few minutes.
+    </p>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key=@ViewBag.RPkey
+            data-amount=@ViewBag.Amount
+            data-currency="INR"
+            data-order_id=@ViewBag.Order
+            data-buttontext="Pay with Razorpay"
+            data-name="GivingActually"
+            data-description="Test transaction"
+            data-image="~/Images/avator.png"
+            data-prefill.name="Gaurav Kumar"
+            data-prefill.email=@ViewBag.EMail
+            data-prefill.contact="9999999999"
+            data-theme.color="#18bc9c">
+    </script>
+    <input type="hidden" custom="Hidden Element" name="hidden">
+
+</form>

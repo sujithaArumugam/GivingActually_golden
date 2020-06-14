@@ -1,0 +1,55 @@
+﻿@model GivingActually_May.Models.CampaignMainViewModel
+<style>
+</style>
+<div class="row"  style="padding:1em;">
+    <div class="col-md-12  col-sm-12" >
+        <div class="comment-wrapper">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Top Donors
+                </div>
+                <div class="panel-body">
+
+                    <ul class="media-list">
+                        @if (Model.CampaignDonationList.Any())
+                        {
+                            int i = 0;
+                            foreach (var item in Model.CampaignDonationList)
+                            {
+
+                                i = i + 1;
+                                <li class="media">
+                                    <a href="#" class="pull-left">
+                                        <img src="~/Images/avator.png" alt="" style="height:30px;width:30px " class="img-circle">
+                                    </a>
+                                    <div class="media-body">
+                                        <span class="text-muted pull-right">
+                                            <span class="date sub-text">on @item.DonatedOn.ToShortDateString()</span>
+                                        </span>
+                                        <strong class="text-success">
+                                            @if (@item.isAnanymous)
+                                            {
+                                                <b>Ananymous</b>
+                                            }
+                                            else
+                                            {@item.DonatedBy}
+                                        </strong>
+                                        <p class="text-center">@Model.CurrencyCode @item.DonationAmnt</p>
+
+                                    </div>
+                                </li>
+                                if (i == 3)
+                                {
+                                    <li style="text-align:right"><a href="#"  data-toggle="modal" data-target="#dnrModal" >See All</a></li>break; }
+                            }
+                        }
+
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

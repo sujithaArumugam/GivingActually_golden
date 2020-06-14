@@ -1,0 +1,303 @@
+﻿@model GivingActually_May.Models.CampaignMainViewModel
+
+@{
+    ViewBag.Title = "Post Updates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    body {
+        color: #fff;
+        background: #9e9e9e;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .form-control {
+        min-height: 41px;
+        background: #fff;
+        border-color: #e3e3e3;
+        box-shadow: none !important;
+        border-radius: 4px;
+    }
+
+        .form-control:focus {
+            border-color: #99c432;
+        }
+
+    .login-form {
+        width: 50%;
+        margin: 0 auto;
+        padding: 30px 0 30px;
+    }
+
+        .login-form form {
+            color: #999;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: #fff;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            position: relative;
+        }
+
+        .login-form h2 {
+            font-size: 24px;
+            color: #454959;
+            margin: 10px 0 25px;
+            font-family: 'Francois One', sans-serif;
+        }
+
+        .login-form .avatar {
+            position: absolute;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            top: -50px;
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            z-index: 9;
+            background: #18bc9c;
+            padding: 15px;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+
+            .login-form .avatar span {
+                width: 100%;
+                padding-top: 25px;
+                padding-left: 25px;
+                color: white;
+                height: 100%;
+            }
+
+        .login-form .btn {
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            border: none;
+        }
+
+    .login-btn {
+        font-size: 16px;
+        font-weight: bold;
+        background: #18bc9c;
+        margin-bottom: 20px;
+    }
+
+        .login-btn:hover, .login-btn:active {
+            background: #86ac2d !important;
+        }
+
+    .social-btn {
+        padding-bottom: 15px;
+    }
+
+        .social-btn .btn {
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+            .social-btn .btn:hover {
+                opacity: 0.8;
+                text-decoration: none;
+            }
+
+        .social-btn .btn-primary {
+            background: #507cc0;
+        }
+
+        .social-btn .btn-info {
+            background: #64ccf1;
+        }
+
+        .social-btn .btn-danger {
+            background: #df4930;
+        }
+
+        .social-btn .btn i {
+            float: left;
+            margin: 1px 10px 0 5px;
+            min-width: 20px;
+            font-size: 18px;
+        }
+
+    .or-seperator {
+        height: 0;
+        margin: 0 auto 20px;
+        text-align: center;
+        border-top: 1px solid #e0e0e0;
+        width: 30%;
+    }
+
+        .or-seperator i {
+            padding: 0 10px;
+            font-size: 15px;
+            text-align: center;
+            background: #fff;
+            display: inline-block;
+            position: relative;
+            top: -13px;
+            z-index: 1;
+        }
+
+    .login-form a {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+    .login-form form a {
+        color: #999;
+        text-decoration: none;
+    }
+
+        .login-form a:hover, .login-form form a:hover {
+            text-decoration: none;
+        }
+
+        .login-form form a:hover {
+            text-decoration: underline;
+        }
+
+
+    #progressbar {
+        margin-bottom: 30px;
+        overflow: hidden;
+        /*CSS counters to number the steps*/
+        counter-reset: step;
+    }
+
+        #progressbar li {
+            list-style-type: none;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 9px;
+            width: 33.33%;
+            float: left;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+            #progressbar li:before {
+                content: counter(step);
+                counter-increment: step;
+                width: 24px;
+                height: 24px;
+                line-height: 26px;
+                display: block;
+                font-size: 12px;
+                color: #333;
+                background: white;
+                border-radius: 25px;
+                margin: 0 auto 10px auto;
+            }
+
+            /*progressbar connectors*/
+            #progressbar li:after {
+                content: '';
+                width: 100%;
+                height: 2px;
+                background: grey;
+                position: absolute;
+                left: -50%;
+                top: 9px;
+                z-index: -1; /*put it behind the numbers*/
+            }
+
+            #progressbar li:first-child:after {
+                /*connector not needed before the first step*/
+                content: none;
+            }
+
+            /*marking active/completed steps green*/
+            /*The number of the step and the connector before it = green*/
+            #progressbar li.active:before, #progressbar li.active:after {
+                background: #18bc9c;
+                color: white;
+            }
+</style>
+<script src="~/Themes/ckeditor.js"></script>
+<h4 class=" text-center">Post Campaign Updates</h4>
+
+
+<body>
+
+
+    <div class="login-form">
+        @using (Html.BeginForm("PostUpdate", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+        {
+            <h2>
+                About your Campaign Updates
+                <small>Let people know  updates about your fundraising Campaign</small>
+            </h2>
+
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.UserId)
+            <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+           
+
+
+            <div cclass="form-group">
+                <div class="row">
+                    @Html.LabelFor(model => model.campaignupdate.StoryDescription, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.campaignupdate.StoryDescription, new { @id = "FullDescription", @class = "form-control", @cols = 100, @rows = 10, @minlength = "50", @style = "height: 360px;" })
+                        <script>
+                            CKEDITOR.replace('FullDescription');
+                        </script>
+                        @Html.ValidationMessageFor(model => model.campaignupdate.StoryDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group" style="padding-top:2em;">
+                <div class="row">
+                    @Html.Label("Attachement(Image/Video)", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        <input type="file" name="file" multiple="multiple" />
+                        @*<input type="file" class="form-control" name="file2" id="File2" style="width: 100%;" accept=".png,.jpg,.jpeg,.gif,.tif" filesize="10" /> <br />*@
+                    </div>
+                </div>
+            </div>
+
+           
+            
+
+
+
+            <div class="form-group text-center">
+                <input type="submit" value=" PostUpdate" class="btn btn-success btn-lg btn-outline-danger" />
+
+
+            </div>
+            <div class="form-group text-center">
+                @if (Model.Id > 0)
+                {
+                    <a class="action-button-previous" href='/User/CampaignView/?Id=@Model.Id'>Back</a>
+                }
+            </div>
+        }
+
+    </div>
+</body>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("input[type='file']").on("change", function () {
+            if (this.files[0].size > 2000000) {
+                alert("Please upload file less than 2MB. Thanks!!");
+                $(this).val('');
+            }
+        });
+
+    });
+   
+</script>
+

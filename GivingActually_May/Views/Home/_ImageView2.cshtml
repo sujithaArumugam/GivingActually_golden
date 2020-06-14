@@ -1,0 +1,113 @@
+﻿@model GivingActually_May.Models.Files
+
+<style>
+    .avatarimg {
+        position: absolute;
+        bottom: 35%;
+        right: 70%;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        align-content: center;
+        left: 40%;
+        border-radius: 50%;
+        padding: 15px 25px 1px 20px;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        /* background: #18bc9c;
+        padding: 4px 2px 2px 2px;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);*/
+    }
+
+    .contner {
+        position: relative;
+        font-family: Bookman Old Style;
+    }
+</style>
+@{
+    var getImage2 = System.Convert.ToBase64String(@Model.File);
+    var Picture2 = string.Format("data:image/JPG;base64 , {0}", getImage2);
+
+
+    if (@Model.ContentType == "video/mp4")
+    {
+        <video class="img_camViewdetail2 lazy" controls preload="none">
+            <source src="@Url.Content(Picture2)" type="video/mp4" data-target="#myCarousel" data-slide-to="@Model.Index">
+            Your browser does not support the video tag.
+        </video>
+    }
+    else
+    {
+        if ((Model.Index != 3))
+        {
+            if (Model.Index == 1)
+            {
+                <a target="_blank" href="@Url.Content(Picture2)">
+                    <img class="img_camViewdetail2 img-responsive" src="@Url.Content(Picture2)" alt="@Model.FileName" data-target="#myCarousel" data-slide-to="@Model.Index">
+
+                </a>}
+            else
+            {
+                <a target="_blank" href="@Url.Content(Picture2)">
+                    <img class="lazy img_camViewdetail2 img-responsive" src="~/Images/placeholder.png" data-src="@Url.Content(Picture2)" alt="@Model.FileName" data-target="#myCarousel" data-slide-to="@Model.Index">
+
+                </a>
+            }
+
+
+        }
+        else
+        {
+            <a target="_blank" href="@Url.Content(Picture2)" data-target="#myCarousel" data-slide-to="0" class="text-center">
+                <div class="contner">
+                    <img src="~/Images/placeholder.png" data-src="@Url.Content(Picture2)" alt="@Model.FileName" class="lazy img_camViewdetaillast   img-responsive" data-target="#myCarousel" data-slide-to="0">
+                    <div class="avatarimg" style="align-content:center">
+                        <medium>@Model.AttId+</medium>
+                    </div>
+                </div>
+            </a>
+
+        }
+
+
+    }
+}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+        let active = false;
+
+        const lazyLoad = function () {
+            if (active === false) {
+                active = true;
+
+                setTimeout(function () {
+                    lazyImages.forEach(function (lazyImage) {
+                        if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.remove("lazy");
+
+                            lazyImages = lazyImages.filter(function (image) {
+                                return image !== lazyImage;
+                            });
+
+                            if (lazyImages.length === 0) {
+                                document.removeEventListener("scroll", lazyLoad);
+                                window.removeEventListener("resize", lazyLoad);
+                                document.removeEventListener("mousemove", lazyLoad);
+                                window.removeEventListener("orientationchange", lazyLoad);
+                            }
+                        }
+                    });
+
+                    active = false;
+                }, 200);
+            }
+        };
+
+        document.addEventListener("scroll", lazyLoad);
+        window.addEventListener("resize", lazyLoad);
+        document.addEventListener("mousemove", lazyLoad);
+        window.addEventListener("orientationchange", lazyLoad);
+    });
+</script>

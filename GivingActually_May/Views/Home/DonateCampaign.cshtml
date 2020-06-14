@@ -1,0 +1,236 @@
+﻿
+@model GivingActually_May.Models.CampaignMainViewModel
+@{
+    ViewBag.Title = "Donate Here";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                <small>A Help from you is much needed right now</small>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8" style="border:groove">
+            <div class="">
+                @using (Html.BeginForm("DonateCampaign", "Home", FormMethod.Post, new { id = "msform", enctype = "multipart/form-data" }))
+                {
+
+                    <h2 class=" text-center ">Enter Your Donation Here.</h2>
+                    <div class="form-group">
+                        @Html.HiddenFor(m => m.Id)
+                        <div class="row">
+                            <div class="col-xs-3 col-md-3 col-sm-3">
+                                @Html.DropDownListFor(model => model.CampaignDonations.DonationMoneyType, Model.CampaignDonations.selectedListMoney, new { @class = "form-control mType", onChange = "OnMoneyTypeChanged(this)" })
+                                @Html.ValidationMessageFor(model => model.CampaignDonations.DonationMoneyType, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-9 col-md-9 col-sm-9">
+                                <div class="input-group currencysymbol">
+                                    @if (@Model.CampaignDonations.DonationMoneyType == "0")
+                                    {
+                                        <span class="input-group-addon"><span><i style="color: green ">&#8364;</i><i style="color:red">*</i></span></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="input-group-addon"><span><i style="color: green "> &#8377;</i><i style="color:red">*</i></span></span>
+                                    }
+                                    @Html.TextBoxFor(model => model.CampaignDonations.DonationAmnt, new { htmlAttributes = new { @class = "form-control moneyVal", @type = "number", @placeholder = "Enter the Amount here", @required = "required" } })
+                                 
+                                    @Html.ValidationMessageFor(model => model.CampaignDonations.DonationAmnt, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-send"></i><i style="color:red">*</i></span>
+
+                            @Html.EditorFor(model => model.CampaignDonations.IdentityName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Your First Name & Last Name", @maxlength = "50", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.CampaignDonations.IdentityName, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-inline"> @Html.CheckBoxFor(m => m.CampaignDonations.isAnanymous)&nbsp;@Html.DisplayNameFor(x => x.CampaignDonations.isAnanymous)</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i><i style="color:red">*</i></span>
+                            @Html.EditorFor(model => model.CampaignDonations.EMail, new { htmlAttributes = new { @class = "form-control", @type = "email", @placeholder = "Your Email Id" } })
+                            @Html.ValidationMessageFor(model => model.CampaignDonations.EMail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+                    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyB5_Aj7tmIdl_z8qBnVnvBVNZsBTRMdlZY"></script>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i><i style="color:red">*</i></span>
+                            @Html.EditorFor(model => model.CampaignDonations.PlaceName, new { htmlAttributes = new { @class = "form-control", id = "search_input", @placeholder = "Your City" } })
+                            @Html.ValidationMessageFor(model => model.CampaignDonations.PlaceName, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @id = "Latitude", @type = "hidden" } })
+                            @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @id = "Longitude", @type = "hidden" } })
+                        </div>                        
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-success btn-lg btn-outline-danger">Donate</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="well">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        @Html.DisplayFor(m => m.CampaignTitle)
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            @if (Model.CampainOrganizer.BDisplayPic != null)
+                            {
+                                var getImage = System.Convert.ToBase64String(Model.CampainOrganizer.BDisplayPic); var Picture = string.Format("data:image/JPG;base64 , {0}", getImage);<img class="img-responsive" src="@Url.Content(Picture)" alt="@Model.CampainOrganizer.BDisplayPicName" />
+                                <meta property="og:image" content="@Url.Content(Picture)" />
+                            }
+                            else
+                            {<img class="img-responsive" id="user_img"
+                                  margin-left="0px"
+                                  margin-right="180px"
+                                  height="150" width="250" style="padding-left: 40px;" />
+                            }
+                        </div>
+                        <div class="text-center prog_div">
+                            <div class="row">
+                                <div class=" col-md-6 text-left">
+                                    <span class="prog_desc">Raised: &nbsp;&nbsp; <bold>@Model.CurrencyCode <span style="font-weight:bolder">@Model.RaisedAmount</span> </bold> </span>
+                                </div>
+                                <div class=" col-md-6 text-right">
+                                    <span class="prog_desc">Goal: &nbsp;&nbsp; <bold>@Model.CurrencyCode <span style="font-weight:bolder">@Math.Round(Model.CampaignTargetMoney)</span> </bold></span>
+                                </div>
+                            </div>
+                            <div class="progress prog_main">
+                                <div class="progress-bar progress-bar-striped bg-success active" role="progressbar" style="width: @Model.RaisedPercentage%; background-color:#18bc9c" aria-valuenow=@Model.RaisedPercentage aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div id="CommentscountPartialViewDiv">
+                                @{
+                                    Html.RenderPartial("_commentcount", Model);
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="LikesPartialViewDiv">
+                                @{
+                                    Html.RenderPartial("_Like", Model);
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="DonorsPartialViewDiv">
+                                @{
+                                    Html.RenderPartial("_Donors", Model);
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+            <div class="well">
+                <h4>About the Organizer</h4>
+                <div class=" row">
+                    <div class="col-sm-2"><i class="glyphicon glyphicon-user"></i></div>
+                    <div class="col-sm-10"><p>@Model.CreatedBy</p></div>
+                </div>
+                <hr />
+                <p>This campaign beneficiary will receive donation directly.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var searchInput = 'search_input';
+
+    $(document).ready(function () {
+        var autocomplete;
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+            types: ['geocode'],
+        });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var near_place = autocomplete.getPlace();
+            document.getElementById('Longitude').value = near_place.geometry.location.lng();
+            document.getElementById('Latitude').value = near_place.geometry.location.lat();
+
+
+        });
+
+        $("input[type='file']").on("change", function () {
+            if (this.files[0].size > 5000000) {
+                alert("Please upload file less than 5MB. Thanks!!");
+                $(this).val('');
+            }
+        });
+
+    });
+    function textCounter(field, field2, maxlimit) {
+        var countfield = document.getElementById(field2);
+        if (field.value.length > maxlimit) {
+            field.value = field.value.substring(0, maxlimit);
+            return false;
+        } else {
+            countfield.value = maxlimit - field.value.length;
+        }
+    }
+
+    function OnTypeChanged(_this) {
+        var selectedValue = $(_this).val();
+        if (selectedValue == 2 || selectedValue == 4 || selectedValue == 6) {
+
+            hide(document.querySelectorAll('.classIndividual'));
+            show(document.querySelectorAll('.classGroup'));
+
+        }
+        if (selectedValue == 1 || selectedValue == 3) {
+
+            hide(document.querySelectorAll('.classGroup'));
+            show(document.querySelectorAll('.classIndividual'));
+        }
+
+        if (selectedValue == 0) {
+            hide(document.querySelectorAll('.classIndividual'));
+            hide(document.querySelectorAll('.classGroup'));
+        }
+
+
+    }
+    function OnMoneyTypeChanged(_this) {
+        var selectedValue = $(_this).val();
+        if (selectedValue == 0) {
+            $('.currencysymbol .input-group-addon span').html("<i style='color: green'>&#8364;</i><i style='color: red'>*</i>");
+        }
+        else {
+            $('.currencysymbol .input-group-addon span').html("<i style='color: green'>&#8377;</i><i style='color: red'>*</i>");
+        }
+    }
+    function hide(elements) {
+        elements = elements.length ? elements : [elements];
+        for (var index = 0; index < elements.length; index++) {
+            elements[index].style.display = 'none';
+        }
+    }
+
+    function show(elements, specifiedDisplay) {
+        elements = elements.length ? elements : [elements];
+        for (var index = 0; index < elements.length; index++) {
+            elements[index].style.display = specifiedDisplay || 'block';
+        }
+    }
+</script>

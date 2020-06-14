@@ -1,0 +1,72 @@
+﻿@model GivingActually_May.Models.CampaignsListViewModel
+@{
+    ViewBag.Title = "People's Campaigns";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" style="padding-top:2em;">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h1 class="page-header">
+                @ViewBag.Title
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group text-center capaign_card">
+            @Html.LabelFor(model => model.CategoryType, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(model => model.CategoryType, Model.SelectedOptionsList, "Select", new { @class = "form-control", onChange = "OnTypeChanged(this)" })
+            </div>
+        </div>
+        <div id="CampaignViewList">
+            @{
+                Html.RenderPartial("_CampaignListView", Model);
+            }
+        </div>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <div class="col-lg-12">
+            <div id="Campaignpager">
+                @{
+                    Html.RenderPartial("_pager", Model);
+                }
+            </div>
+            <input type="hidden" id="hfCurrentPageIndex" name="currentPageIndex" />
+
+            <div id='loader' style='display: none;'><img src="~/Images/spinner.gif" /></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function OnTypeChanged(_this) {
+
+        var selectedValue = $(_this).val();
+        window.location.href = '/Home/AllCampaigns/?Category=' + selectedValue;// $("#SelectedOptions").val();
+    }
+  
+
+    function PagerClick(index) {
+
+        $.ajax({
+            type: 'POST',
+            url: "/Home/AllCampaignsPartial",
+            data: { 'Category': -1, 'page': index },
+            cache: false,
+            beforeSend: function () {
+                $('#loader').show();
+            },
+
+            complete: function () {
+                $('#loader').hide();
+            },
+            success: function (response) {
+                $("#CampaignViewList").html(response);
+                document.getElementById("CategoryType").focus();
+
+            }
+        });
+    }
+</script>
+

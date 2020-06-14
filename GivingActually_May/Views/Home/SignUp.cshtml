@@ -1,0 +1,92 @@
+﻿@model GivingActually_May.Models.RegisterModel
+
+@{
+    ViewBag.Title = "SignUp";
+
+}
+
+<h2>SignUp</h2>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<body>
+    <div class="container">
+        <!-- MultiStep Form -->
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                @using (Html.BeginForm("SignUp", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "msform", role = "form" }))
+                {
+                    <!-- fieldsets -->
+                    <fieldset>
+                        <h2 class="fs-title">SignUp Here</h2>
+                        <h3 class="fs-subtitle">Register to Giving Actually to Let Your Kindness Play in the World!</h3>
+                        <div class="form-horizontal" >
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row">
+                                @Html.HiddenFor(m => m.UserName, new { @class = "form-control", @autocomplete = "off" })
+                                @Html.HiddenFor(m => m.DPName, new { @class = "form-control", @autocomplete = "off" })
+                                @Html.HiddenFor(m => m.Password, new { @class = "form-control" })
+                                @Html.HiddenFor(m => m.ConfirmPassword, new { @class = "form-control" })
+
+                                @Html.HiddenFor(m => m.IsSecurityTokenGenerated)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                            <p>The OTP has been Sent to the Above Email. Please input the OTP before 5 minutes.</p>
+                                        
+                                    </div>
+                                </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.SecurityToken, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                                            <div class="col-md-8">
+                                                <div class="col_md-8">
+                                                    @Html.PasswordFor(m => m.SecurityToken, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.SecurityToken, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="col-md-offset-2 col-lg-6">
+                                            <div class="form-group">
+                                                <div class="col-md-offset-4 col-md-8">
+                                                    <input type="submit" value="SignUp" class="next action-button" />
+                                                    <p>
+                                                        @Html.ActionLink("Resend OTP?", "SignUp", "Home")
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                @Html.ActionLink("Already a User of Giving Actually? Login", "Login", "Home", new { style = "float:right ; padding :20px ; color: whitesmoke" })
+                            </div>
+                    </fieldset>
+                }
+
+
+            </div>
+        </div>
+        <!-- /.MultiStep Form -->
+    </div>
+
+
+</body>
+
+
+<script type="text/javascript">
+    var formData = new FormData();
+    function navigate(target) {
+       
+        $.post(target, { UserName: $('#UserName').val() });
+    }
+
+
+</script>

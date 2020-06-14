@@ -1,0 +1,1584 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GivingActuallyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="CityName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Beneficiary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Btype" Type="int" />
+          <Property Name="BName" Type="varchar" MaxLength="255" />
+          <Property Name="BAge" Type="int" />
+          <Property Name="BGender" Type="int" />
+          <Property Name="BPhone" Type="varchar" MaxLength="255" />
+          <Property Name="BResidence" Type="varchar" MaxLength="255" />
+          <Property Name="DPName" Type="varchar" MaxLength="255" />
+          <Property Name="BGroupName" Type="varchar" MaxLength="255" />
+          <Property Name="BRelationship" Type="varchar" MaxLength="255" />
+          <Property Name="BMembers" Type="int" />
+          <Property Name="StoryId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="Category" Type="int" Nullable="false" />
+          <Property Name="IFSCcode" Type="varchar" MaxLength="50" />
+          <Property Name="BankName" Type="varchar" MaxLength="50" />
+          <Property Name="BankLocation" Type="varchar" MaxLength="50" />
+          <Property Name="AccountNo" Type="varchar" MaxLength="50" />
+          <Property Name="BankUserName" Type="varchar" MaxLength="50" />
+          <Property Name="DP" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tbl_BeneficiaryDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BPincode" Type="varchar" MaxLength="25" />
+          <Property Name="BCountry" Type="varchar" MaxLength="255" />
+          <Property Name="BResidence" Type="int" />
+          <Property Name="DP" Type="varbinary(max)" />
+          <Property Name="DPName" Type="varchar" MaxLength="255" />
+          <Property Name="StoryId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="Category" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Campaign">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IsApprovedbyAdmin" Type="bit" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="Category" Type="int" Nullable="false" />
+          <Property Name="Story_Expense" Type="xml" />
+          <Property Name="storyDescription" Type="varchar(max)" />
+          <Property Name="MoneyType" Type="varchar" MaxLength="50" />
+          <Property Name="TargetAmount" Type="decimal" Precision="25" Scale="10" />
+          <Property Name="BeneficiaryType" Type="int" />
+          <Property Name="BName" Type="varchar" MaxLength="255" />
+          <Property Name="BGroupName" Type="varchar" MaxLength="255" />
+          <Property Name="NGOName" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Tbl_CampaignDescription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="storyDescription" Type="varchar(max)" />
+          <Property Name="StoryId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tbl_CampaignDescriptionUpdates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="storyDescription" Type="varchar(max)" />
+          <Property Name="StoryId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tbl_CampaignDonation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoryId" Type="int" Nullable="false" />
+          <Property Name="DonationAmnt" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="isAnanymous" Type="bit" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="PinCode" Type="varchar" MaxLength="30" />
+          <Property Name="DonatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DonatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="PlaceName" Type="varchar" MaxLength="255" />
+          <Property Name="Latitude" Type="varchar" MaxLength="100" />
+          <Property Name="Longitude" Type="varchar" MaxLength="100" />
+          <Property Name="isPaid" Type="bit" />
+          <Property Name="razorpay_order_id" Type="varchar" MaxLength="100" />
+          <Property Name="razorpay_payment_id" Type="varchar" MaxLength="100" />
+          <Property Name="razorpay_signature" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Tbl_CampaignTarget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TargetAmount" Type="money" />
+          <Property Name="MoneyType" Type="varchar" MaxLength="100" />
+          <Property Name="TargetDate" Type="date" />
+          <Property Name="StoryId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tbl_CityDetails">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Latitude" Type="varchar" MaxLength="100" />
+          <Property Name="longitude" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Tbl_Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_GeoLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CityId" Type="int" />
+          <Property Name="CityName" Type="varchar" MaxLength="255" />
+          <Property Name="Distance" Type="varchar" MaxLength="100" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Like">
+          <Key>
+            <PropertyRef Name="LikeID" />
+          </Key>
+          <Property Name="LikeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="updatedDate" Type="date" />
+          <Property Name="StoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_ParentComment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CommentMessage" Type="varchar" MaxLength="300" />
+          <Property Name="CommentDate" Type="date" />
+          <Property Name="StoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_PinCodeDetails">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="varchar" MaxLength="100" />
+          <Property Name="StateName" Type="varchar" MaxLength="100" />
+          <Property Name="CountryIndicator" Type="varchar" MaxLength="10" />
+          <Property Name="Latitude" Type="varchar" MaxLength="100" />
+          <Property Name="longitude" Type="varchar" MaxLength="100" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="pincode" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Tbl_States">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Stories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IsApprovedbyAdmin" Type="bit" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+          <Property Name="Story" Type="varchar(max)" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="Category" Type="int" Nullable="false" />
+          <Property Name="Story_Expense" Type="xml" />
+          <Property Name="Email" Type="nchar" MaxLength="100" />
+          <Property Name="storyDescription" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Tbl_StoriesAttachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoryId" Type="int" Nullable="false" />
+          <Property Name="MediaFile" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="FileName" Type="varchar" MaxLength="255" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Tbl_Target">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TargetAmount" Type="money" />
+          <Property Name="MoneyType" Type="varchar" MaxLength="100" />
+          <Property Name="TargetDate" Type="date" />
+          <Property Name="HospitalName" Type="varchar" MaxLength="100" />
+          <Property Name="HospitalLocation" Type="varchar" MaxLength="100" />
+          <Property Name="Ailment" Type="varchar" MaxLength="100" />
+          <Property Name="StoryId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="Category" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_UpdatesAttachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoryId" Type="int" Nullable="false" />
+          <Property Name="MediaFile" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="FileName" Type="varchar" MaxLength="255" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="200" />
+          <Property Name="UpdateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsAcLocked" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsSpamUser" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="CurrentLoginDate" Type="datetime" />
+          <Property Name="BasedOut" Type="varchar" MaxLength="255" />
+          <Property Name="Latitude" Type="varchar" MaxLength="50" />
+          <Property Name="Longitude" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tbl_UserAuthentication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecurityCode" Type="int" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cities_States">
+          <End Role="Tbl_States" Type="Self.Tbl_States" Multiplicity="1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_States">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ctry_cities">
+          <End Role="Tbl_Countries" Type="Self.Tbl_Countries" Multiplicity="1" />
+          <End Role="Tbl_PinCodeDetails" Type="Self.Tbl_PinCodeDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Tbl_PinCodeDetails">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_Story">
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="1" />
+          <End Role="Tbl_Like" Type="Self.Tbl_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Campaign">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Like">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_user">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Like" Type="Self.Tbl_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Like">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_parent_user">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_ParentComment" Type="Self.Tbl_ParentComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_ParentComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParentComment_Story">
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="1" />
+          <End Role="Tbl_ParentComment" Type="Self.Tbl_ParentComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Campaign">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_ParentComment">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_States_Countries">
+          <End Role="Tbl_Countries" Type="Self.Tbl_Countries" Multiplicity="1" />
+          <End Role="Tbl_States" Type="Self.Tbl_States" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Tbl_States">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Attachment_Tbl_Campaign">
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="1" />
+          <End Role="Tbl_UpdatesAttachment" Type="Self.Tbl_UpdatesAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Campaign">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_UpdatesAttachment">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Campaign_Tbl_Campaign">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Campaign">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CampaignDonation_Tbl_Campaign">
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="1" />
+          <End Role="Tbl_CampaignDonation" Type="Self.Tbl_CampaignDonation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Campaign">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_CampaignDonation">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CTarget_Tbl_Stories">
+          <End Role="Tbl_Stories" Type="Self.Tbl_Stories" Multiplicity="1" />
+          <End Role="Tbl_Target" Type="Self.Tbl_Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Stories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Target">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Stories_Tbl_Stories">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Stories" Type="Self.Tbl_Stories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Stories">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StoriesAttachment_Tbl_Campaign">
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="1" />
+          <End Role="Tbl_StoriesAttachment" Type="Self.Tbl_StoriesAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Campaign">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_StoriesAttachment">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Target_Tbl_Stories">
+          <End Role="Tbl_Stories" Type="Self.Tbl_Stories" Multiplicity="1" />
+          <End Role="Tbl_Target" Type="Self.Tbl_Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Stories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Target">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Targettt_Tbl_Stories">
+          <End Role="Tbl_Stories" Type="Self.Tbl_Stories" Multiplicity="1" />
+          <End Role="Tbl_Target" Type="Self.Tbl_Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Stories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Target">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetnearestCities" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LAT" Type="varchar" Mode="In" />
+          <Parameter Name="LONG" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="GivingActuallyModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Beneficiary" EntityType="Self.Tbl_Beneficiary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_BeneficiaryDetails" EntityType="Self.Tbl_BeneficiaryDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Campaign" EntityType="Self.Tbl_Campaign" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_CampaignDescription" EntityType="Self.Tbl_CampaignDescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_CampaignDescriptionUpdates" EntityType="Self.Tbl_CampaignDescriptionUpdates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_CampaignDonation" EntityType="Self.Tbl_CampaignDonation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_CampaignTarget" EntityType="Self.Tbl_CampaignTarget" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_CityDetails" EntityType="Self.Tbl_CityDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Countries" EntityType="Self.Tbl_Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_GeoLocation" EntityType="Self.Tbl_GeoLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Like" EntityType="Self.Tbl_Like" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_ParentComment" EntityType="Self.Tbl_ParentComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_PinCodeDetails" EntityType="Self.Tbl_PinCodeDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_States" EntityType="Self.Tbl_States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Stories" EntityType="Self.Tbl_Stories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_StoriesAttachment" EntityType="Self.Tbl_StoriesAttachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Target" EntityType="Self.Tbl_Target" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_UpdatesAttachment" EntityType="Self.Tbl_UpdatesAttachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_UserAuthentication" EntityType="Self.Tbl_UserAuthentication" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cities_States" Association="Self.FK_Cities_States">
+            <End Role="Tbl_States" EntitySet="Tbl_States" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ctry_cities" Association="Self.FK_ctry_cities">
+            <End Role="Tbl_Countries" EntitySet="Tbl_Countries" />
+            <End Role="Tbl_PinCodeDetails" EntitySet="Tbl_PinCodeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_Story" Association="Self.FK_Like_Story">
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+            <End Role="Tbl_Like" EntitySet="Tbl_Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_user" Association="Self.FK_Like_user">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Like" EntitySet="Tbl_Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_parent_user" Association="Self.FK_parent_user">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_ParentComment" EntitySet="Tbl_ParentComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParentComment_Story" Association="Self.FK_ParentComment_Story">
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+            <End Role="Tbl_ParentComment" EntitySet="Tbl_ParentComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_States_Countries" Association="Self.FK_States_Countries">
+            <End Role="Tbl_Countries" EntitySet="Tbl_Countries" />
+            <End Role="Tbl_States" EntitySet="Tbl_States" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Attachment_Tbl_Campaign" Association="Self.FK_Tbl_Attachment_Tbl_Campaign">
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+            <End Role="Tbl_UpdatesAttachment" EntitySet="Tbl_UpdatesAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Campaign_Tbl_Campaign" Association="Self.FK_Tbl_Campaign_Tbl_Campaign">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CampaignDonation_Tbl_Campaign" Association="Self.FK_Tbl_CampaignDonation_Tbl_Campaign">
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+            <End Role="Tbl_CampaignDonation" EntitySet="Tbl_CampaignDonation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CTarget_Tbl_Stories" Association="Self.FK_Tbl_CTarget_Tbl_Stories">
+            <End Role="Tbl_Stories" EntitySet="Tbl_Stories" />
+            <End Role="Tbl_Target" EntitySet="Tbl_Target" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Stories_Tbl_Stories" Association="Self.FK_Tbl_Stories_Tbl_Stories">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Stories" EntitySet="Tbl_Stories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StoriesAttachment_Tbl_Campaign" Association="Self.FK_Tbl_StoriesAttachment_Tbl_Campaign">
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+            <End Role="Tbl_StoriesAttachment" EntitySet="Tbl_StoriesAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Target_Tbl_Stories" Association="Self.FK_Tbl_Target_Tbl_Stories">
+            <End Role="Tbl_Stories" EntitySet="Tbl_Stories" />
+            <End Role="Tbl_Target" EntitySet="Tbl_Target" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Targettt_Tbl_Stories" Association="Self.FK_Tbl_Targettt_Tbl_Stories">
+            <End Role="Tbl_Stories" EntitySet="Tbl_Stories" />
+            <End Role="Tbl_Target" EntitySet="Tbl_Target" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GivingActuallyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tbl_States" Relationship="Self.FK_Cities_States" FromRole="Cities" ToRole="Tbl_States" />
+        </EntityType>
+        <EntityType Name="Tbl_Beneficiary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Btype" Type="Int32" />
+          <Property Name="BName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BAge" Type="Int32" />
+          <Property Name="BGender" Type="Int32" />
+          <Property Name="BPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BResidence" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DPName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BGroupName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BRelationship" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BMembers" Type="Int32" />
+          <Property Name="StoryId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+          <Property Name="IFSCcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BankUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DP" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tbl_BeneficiaryDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BPincode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="BCountry" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BResidence" Type="Int32" />
+          <Property Name="DP" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="DPName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StoryId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Campaign">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IsApprovedbyAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+          <Property Name="Story_Expense" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="storyDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MoneyType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TargetAmount" Type="Decimal" Precision="25" Scale="10" />
+          <Property Name="BeneficiaryType" Type="Int32" />
+          <Property Name="BName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BGroupName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NGOName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Like" Relationship="Self.FK_Like_Story" FromRole="Tbl_Campaign" ToRole="Tbl_Like" />
+          <NavigationProperty Name="Tbl_ParentComment" Relationship="Self.FK_ParentComment_Story" FromRole="Tbl_Campaign" ToRole="Tbl_ParentComment" />
+          <NavigationProperty Name="Tbl_UpdatesAttachment" Relationship="Self.FK_Tbl_Attachment_Tbl_Campaign" FromRole="Tbl_Campaign" ToRole="Tbl_UpdatesAttachment" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Campaign_Tbl_Campaign" FromRole="Tbl_Campaign" ToRole="Tbl_User" />
+          <NavigationProperty Name="Tbl_CampaignDonation" Relationship="Self.FK_Tbl_CampaignDonation_Tbl_Campaign" FromRole="Tbl_Campaign" ToRole="Tbl_CampaignDonation" />
+          <NavigationProperty Name="Tbl_StoriesAttachment" Relationship="Self.FK_Tbl_StoriesAttachment_Tbl_Campaign" FromRole="Tbl_Campaign" ToRole="Tbl_StoriesAttachment" />
+        </EntityType>
+        <EntityType Name="Tbl_CampaignDescription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="storyDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StoryId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Tbl_CampaignDescriptionUpdates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="storyDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StoryId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Tbl_CampaignDonation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoryId" Type="Int32" Nullable="false" />
+          <Property Name="DonationAmnt" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isAnanymous" Type="Boolean" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="PinCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DonatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DonatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="PlaceName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="isPaid" Type="Boolean" />
+          <Property Name="razorpay_order_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="razorpay_payment_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="razorpay_signature" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Campaign" Relationship="Self.FK_Tbl_CampaignDonation_Tbl_Campaign" FromRole="Tbl_CampaignDonation" ToRole="Tbl_Campaign" />
+        </EntityType>
+        <EntityType Name="Tbl_CampaignTarget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TargetAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MoneyType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TargetDate" Type="DateTime" Precision="0" />
+          <Property Name="StoryId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Tbl_CityDetails">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Latitude" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="longitude" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="CountryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tbl_PinCodeDetails" Relationship="Self.FK_ctry_cities" FromRole="Tbl_Countries" ToRole="Tbl_PinCodeDetails" />
+          <NavigationProperty Name="Tbl_States" Relationship="Self.FK_States_Countries" FromRole="Tbl_Countries" ToRole="Tbl_States" />
+        </EntityType>
+        <EntityType Name="Tbl_GeoLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="CityName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Distance" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Tbl_Like">
+          <Key>
+            <PropertyRef Name="LikeID" />
+          </Key>
+          <Property Name="LikeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="updatedDate" Type="DateTime" Precision="0" />
+          <Property Name="StoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Campaign" Relationship="Self.FK_Like_Story" FromRole="Tbl_Like" ToRole="Tbl_Campaign" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Like_user" FromRole="Tbl_Like" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_ParentComment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CommentMessage" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="CommentDate" Type="DateTime" Precision="0" />
+          <Property Name="StoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Campaign" Relationship="Self.FK_ParentComment_Story" FromRole="Tbl_ParentComment" ToRole="Tbl_Campaign" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_parent_user" FromRole="Tbl_ParentComment" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_PinCodeDetails">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StateName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CountryIndicator" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="longitude" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="pincode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Countries" Relationship="Self.FK_ctry_cities" FromRole="Tbl_PinCodeDetails" ToRole="Tbl_Countries" />
+        </EntityType>
+        <EntityType Name="Tbl_States">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="StateName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_Cities_States" FromRole="Tbl_States" ToRole="Cities" />
+          <NavigationProperty Name="Tbl_Countries" Relationship="Self.FK_States_Countries" FromRole="Tbl_States" ToRole="Tbl_Countries" />
+        </EntityType>
+        <EntityType Name="Tbl_Stories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IsApprovedbyAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Story" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+          <Property Name="Story_Expense" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="storyDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Target" Relationship="Self.FK_Tbl_CTarget_Tbl_Stories" FromRole="Tbl_Stories" ToRole="Tbl_Target" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Stories_Tbl_Stories" FromRole="Tbl_Stories" ToRole="Tbl_User" />
+          <NavigationProperty Name="Tbl_Target1" Relationship="Self.FK_Tbl_Target_Tbl_Stories" FromRole="Tbl_Stories" ToRole="Tbl_Target" />
+          <NavigationProperty Name="Tbl_Target2" Relationship="Self.FK_Tbl_Targettt_Tbl_Stories" FromRole="Tbl_Stories" ToRole="Tbl_Target" />
+        </EntityType>
+        <EntityType Name="Tbl_StoriesAttachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoryId" Type="Int32" Nullable="false" />
+          <Property Name="MediaFile" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="FileName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContentType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_Campaign" Relationship="Self.FK_Tbl_StoriesAttachment_Tbl_Campaign" FromRole="Tbl_StoriesAttachment" ToRole="Tbl_Campaign" />
+        </EntityType>
+        <EntityType Name="Tbl_Target">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TargetAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MoneyType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TargetDate" Type="DateTime" Precision="0" />
+          <Property Name="HospitalName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HospitalLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Ailment" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StoryId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Stories" Relationship="Self.FK_Tbl_CTarget_Tbl_Stories" FromRole="Tbl_Target" ToRole="Tbl_Stories" />
+          <NavigationProperty Name="Tbl_Stories1" Relationship="Self.FK_Tbl_Target_Tbl_Stories" FromRole="Tbl_Target" ToRole="Tbl_Stories" />
+          <NavigationProperty Name="Tbl_Stories2" Relationship="Self.FK_Tbl_Targettt_Tbl_Stories" FromRole="Tbl_Target" ToRole="Tbl_Stories" />
+        </EntityType>
+        <EntityType Name="Tbl_UpdatesAttachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoryId" Type="Int32" Nullable="false" />
+          <Property Name="MediaFile" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="FileName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContentType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Campaign" Relationship="Self.FK_Tbl_Attachment_Tbl_Campaign" FromRole="Tbl_UpdatesAttachment" ToRole="Tbl_Campaign" />
+        </EntityType>
+        <EntityType Name="Tbl_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsAcLocked" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsSpamUser" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="CurrentLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="BasedOut" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Campaign" Relationship="Self.FK_Tbl_Campaign_Tbl_Campaign" FromRole="Tbl_User" ToRole="Tbl_Campaign" />
+          <NavigationProperty Name="Tbl_Like" Relationship="Self.FK_Like_user" FromRole="Tbl_User" ToRole="Tbl_Like" />
+          <NavigationProperty Name="Tbl_ParentComment" Relationship="Self.FK_parent_user" FromRole="Tbl_User" ToRole="Tbl_ParentComment" />
+          <NavigationProperty Name="Tbl_Stories" Relationship="Self.FK_Tbl_Stories_Tbl_Stories" FromRole="Tbl_User" ToRole="Tbl_Stories" />
+        </EntityType>
+        <EntityType Name="Tbl_UserAuthentication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SecurityCode" Type="Int32" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Cities_States">
+          <End Role="Tbl_States" Type="Self.Tbl_States" Multiplicity="1" />
+          <End Role="Cities" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_States">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_Story">
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="1" />
+          <End Role="Tbl_Like" Type="Self.Tbl_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Campaign">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Like">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParentComment_Story">
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="1" />
+          <End Role="Tbl_ParentComment" Type="Self.Tbl_ParentComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Campaign">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_ParentComment">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Attachment_Tbl_Campaign">
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="1" />
+          <End Role="Tbl_UpdatesAttachment" Type="Self.Tbl_UpdatesAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Campaign">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_UpdatesAttachment">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Campaign_Tbl_Campaign">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Campaign">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CampaignDonation_Tbl_Campaign">
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="1" />
+          <End Role="Tbl_CampaignDonation" Type="Self.Tbl_CampaignDonation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Campaign">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_CampaignDonation">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_StoriesAttachment_Tbl_Campaign">
+          <End Role="Tbl_Campaign" Type="Self.Tbl_Campaign" Multiplicity="1" />
+          <End Role="Tbl_StoriesAttachment" Type="Self.Tbl_StoriesAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Campaign">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_StoriesAttachment">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ctry_cities">
+          <End Role="Tbl_Countries" Type="Self.Tbl_Countries" Multiplicity="1" />
+          <End Role="Tbl_PinCodeDetails" Type="Self.Tbl_PinCodeDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Tbl_PinCodeDetails">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_States_Countries">
+          <End Role="Tbl_Countries" Type="Self.Tbl_Countries" Multiplicity="1" />
+          <End Role="Tbl_States" Type="Self.Tbl_States" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Tbl_States">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Like_user">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Like" Type="Self.Tbl_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Like">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_parent_user">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_ParentComment" Type="Self.Tbl_ParentComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_ParentComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CTarget_Tbl_Stories">
+          <End Role="Tbl_Stories" Type="Self.Tbl_Stories" Multiplicity="1" />
+          <End Role="Tbl_Target" Type="Self.Tbl_Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Stories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Target">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Stories_Tbl_Stories">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Stories" Type="Self.Tbl_Stories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Stories">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Target_Tbl_Stories">
+          <End Role="Tbl_Stories" Type="Self.Tbl_Stories" Multiplicity="1" />
+          <End Role="Tbl_Target" Type="Self.Tbl_Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Stories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Target">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Targettt_Tbl_Stories">
+          <End Role="Tbl_Stories" Type="Self.Tbl_Stories" Multiplicity="1" />
+          <End Role="Tbl_Target" Type="Self.Tbl_Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Stories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tbl_Target">
+              <PropertyRef Name="StoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GivingActuallyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Tbl_Beneficiary" EntityType="Self.Tbl_Beneficiary" />
+          <EntitySet Name="Tbl_BeneficiaryDetails" EntityType="Self.Tbl_BeneficiaryDetails" />
+          <EntitySet Name="Tbl_Campaign" EntityType="Self.Tbl_Campaign" />
+          <EntitySet Name="Tbl_CampaignDescription" EntityType="Self.Tbl_CampaignDescription" />
+          <EntitySet Name="Tbl_CampaignDescriptionUpdates" EntityType="Self.Tbl_CampaignDescriptionUpdates" />
+          <EntitySet Name="Tbl_CampaignDonation" EntityType="Self.Tbl_CampaignDonation" />
+          <EntitySet Name="Tbl_CampaignTarget" EntityType="Self.Tbl_CampaignTarget" />
+          <EntitySet Name="Tbl_CityDetails" EntityType="Self.Tbl_CityDetails" />
+          <EntitySet Name="Tbl_Countries" EntityType="Self.Tbl_Countries" />
+          <EntitySet Name="Tbl_GeoLocation" EntityType="Self.Tbl_GeoLocation" />
+          <EntitySet Name="Tbl_Like" EntityType="Self.Tbl_Like" />
+          <EntitySet Name="Tbl_ParentComment" EntityType="Self.Tbl_ParentComment" />
+          <EntitySet Name="Tbl_PinCodeDetails" EntityType="Self.Tbl_PinCodeDetails" />
+          <EntitySet Name="Tbl_States" EntityType="Self.Tbl_States" />
+          <EntitySet Name="Tbl_Stories" EntityType="Self.Tbl_Stories" />
+          <EntitySet Name="Tbl_StoriesAttachment" EntityType="Self.Tbl_StoriesAttachment" />
+          <EntitySet Name="Tbl_Target" EntityType="Self.Tbl_Target" />
+          <EntitySet Name="Tbl_UpdatesAttachment" EntityType="Self.Tbl_UpdatesAttachment" />
+          <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" />
+          <EntitySet Name="Tbl_UserAuthentication" EntityType="Self.Tbl_UserAuthentication" />
+          <AssociationSet Name="FK_Cities_States" Association="Self.FK_Cities_States">
+            <End Role="Tbl_States" EntitySet="Tbl_States" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_Story" Association="Self.FK_Like_Story">
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+            <End Role="Tbl_Like" EntitySet="Tbl_Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParentComment_Story" Association="Self.FK_ParentComment_Story">
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+            <End Role="Tbl_ParentComment" EntitySet="Tbl_ParentComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Attachment_Tbl_Campaign" Association="Self.FK_Tbl_Attachment_Tbl_Campaign">
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+            <End Role="Tbl_UpdatesAttachment" EntitySet="Tbl_UpdatesAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Campaign_Tbl_Campaign" Association="Self.FK_Tbl_Campaign_Tbl_Campaign">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CampaignDonation_Tbl_Campaign" Association="Self.FK_Tbl_CampaignDonation_Tbl_Campaign">
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+            <End Role="Tbl_CampaignDonation" EntitySet="Tbl_CampaignDonation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_StoriesAttachment_Tbl_Campaign" Association="Self.FK_Tbl_StoriesAttachment_Tbl_Campaign">
+            <End Role="Tbl_Campaign" EntitySet="Tbl_Campaign" />
+            <End Role="Tbl_StoriesAttachment" EntitySet="Tbl_StoriesAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ctry_cities" Association="Self.FK_ctry_cities">
+            <End Role="Tbl_Countries" EntitySet="Tbl_Countries" />
+            <End Role="Tbl_PinCodeDetails" EntitySet="Tbl_PinCodeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_States_Countries" Association="Self.FK_States_Countries">
+            <End Role="Tbl_Countries" EntitySet="Tbl_Countries" />
+            <End Role="Tbl_States" EntitySet="Tbl_States" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Like_user" Association="Self.FK_Like_user">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Like" EntitySet="Tbl_Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_parent_user" Association="Self.FK_parent_user">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_ParentComment" EntitySet="Tbl_ParentComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CTarget_Tbl_Stories" Association="Self.FK_Tbl_CTarget_Tbl_Stories">
+            <End Role="Tbl_Stories" EntitySet="Tbl_Stories" />
+            <End Role="Tbl_Target" EntitySet="Tbl_Target" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Stories_Tbl_Stories" Association="Self.FK_Tbl_Stories_Tbl_Stories">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Stories" EntitySet="Tbl_Stories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Target_Tbl_Stories" Association="Self.FK_Tbl_Target_Tbl_Stories">
+            <End Role="Tbl_Stories" EntitySet="Tbl_Stories" />
+            <End Role="Tbl_Target" EntitySet="Tbl_Target" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Targettt_Tbl_Stories" Association="Self.FK_Tbl_Targettt_Tbl_Stories">
+            <End Role="Tbl_Stories" EntitySet="Tbl_Stories" />
+            <End Role="Tbl_Target" EntitySet="Tbl_Target" />
+          </AssociationSet>
+          <FunctionImport Name="GetnearestCities">
+            <Parameter Name="LAT" Mode="In" Type="String" />
+            <Parameter Name="LONG" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GivingActuallyModelStoreContainer" CdmEntityContainer="GivingActuallyEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="GivingActuallyModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="GivingActuallyModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Beneficiary">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_Beneficiary">
+              <MappingFragment StoreEntitySet="Tbl_Beneficiary">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Btype" ColumnName="Btype" />
+                <ScalarProperty Name="BName" ColumnName="BName" />
+                <ScalarProperty Name="BAge" ColumnName="BAge" />
+                <ScalarProperty Name="BGender" ColumnName="BGender" />
+                <ScalarProperty Name="BPhone" ColumnName="BPhone" />
+                <ScalarProperty Name="BResidence" ColumnName="BResidence" />
+                <ScalarProperty Name="DPName" ColumnName="DPName" />
+                <ScalarProperty Name="BGroupName" ColumnName="BGroupName" />
+                <ScalarProperty Name="BRelationship" ColumnName="BRelationship" />
+                <ScalarProperty Name="BMembers" ColumnName="BMembers" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="IFSCcode" ColumnName="IFSCcode" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankLocation" ColumnName="BankLocation" />
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="BankUserName" ColumnName="BankUserName" />
+                <ScalarProperty Name="DP" ColumnName="DP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_BeneficiaryDetails">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_BeneficiaryDetails">
+              <MappingFragment StoreEntitySet="Tbl_BeneficiaryDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BPincode" ColumnName="BPincode" />
+                <ScalarProperty Name="BCountry" ColumnName="BCountry" />
+                <ScalarProperty Name="BResidence" ColumnName="BResidence" />
+                <ScalarProperty Name="DP" ColumnName="DP" />
+                <ScalarProperty Name="DPName" ColumnName="DPName" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Campaign">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_Campaign">
+              <MappingFragment StoreEntitySet="Tbl_Campaign">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsApprovedbyAdmin" ColumnName="IsApprovedbyAdmin" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Story_Expense" ColumnName="Story_Expense" />
+                <ScalarProperty Name="storyDescription" ColumnName="storyDescription" />
+                <ScalarProperty Name="MoneyType" ColumnName="MoneyType" />
+                <ScalarProperty Name="TargetAmount" ColumnName="TargetAmount" />
+                <ScalarProperty Name="BeneficiaryType" ColumnName="BeneficiaryType" />
+                <ScalarProperty Name="BName" ColumnName="BName" />
+                <ScalarProperty Name="BGroupName" ColumnName="BGroupName" />
+                <ScalarProperty Name="NGOName" ColumnName="NGOName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_CampaignDescription">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_CampaignDescription">
+              <MappingFragment StoreEntitySet="Tbl_CampaignDescription">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="storyDescription" ColumnName="storyDescription" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_CampaignDescriptionUpdates">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_CampaignDescriptionUpdates">
+              <MappingFragment StoreEntitySet="Tbl_CampaignDescriptionUpdates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="storyDescription" ColumnName="storyDescription" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_CampaignDonation">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_CampaignDonation">
+              <MappingFragment StoreEntitySet="Tbl_CampaignDonation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+                <ScalarProperty Name="DonationAmnt" ColumnName="DonationAmnt" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="isAnanymous" ColumnName="isAnanymous" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="DonatedBy" ColumnName="DonatedBy" />
+                <ScalarProperty Name="DonatedOn" ColumnName="DonatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="PlaceName" ColumnName="PlaceName" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="isPaid" ColumnName="isPaid" />
+                <ScalarProperty Name="razorpay_order_id" ColumnName="razorpay_order_id" />
+                <ScalarProperty Name="razorpay_payment_id" ColumnName="razorpay_payment_id" />
+                <ScalarProperty Name="razorpay_signature" ColumnName="razorpay_signature" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_CampaignTarget">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_CampaignTarget">
+              <MappingFragment StoreEntitySet="Tbl_CampaignTarget">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TargetAmount" ColumnName="TargetAmount" />
+                <ScalarProperty Name="MoneyType" ColumnName="MoneyType" />
+                <ScalarProperty Name="TargetDate" ColumnName="TargetDate" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_CityDetails">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_CityDetails">
+              <MappingFragment StoreEntitySet="Tbl_CityDetails">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Countries">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_Countries">
+              <MappingFragment StoreEntitySet="Tbl_Countries">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_GeoLocation">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_GeoLocation">
+              <MappingFragment StoreEntitySet="Tbl_GeoLocation">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Like">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_Like">
+              <MappingFragment StoreEntitySet="Tbl_Like">
+                <ScalarProperty Name="LikeID" ColumnName="LikeID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_ParentComment">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_ParentComment">
+              <MappingFragment StoreEntitySet="Tbl_ParentComment">
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CommentMessage" ColumnName="CommentMessage" />
+                <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_PinCodeDetails">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_PinCodeDetails">
+              <MappingFragment StoreEntitySet="Tbl_PinCodeDetails">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="CountryIndicator" ColumnName="CountryIndicator" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="pincode" ColumnName="pincode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_States">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_States">
+              <MappingFragment StoreEntitySet="Tbl_States">
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Stories">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_Stories">
+              <MappingFragment StoreEntitySet="Tbl_Stories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsApprovedbyAdmin" ColumnName="IsApprovedbyAdmin" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Story" ColumnName="Story" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Story_Expense" ColumnName="Story_Expense" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="storyDescription" ColumnName="storyDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_StoriesAttachment">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_StoriesAttachment">
+              <MappingFragment StoreEntitySet="Tbl_StoriesAttachment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+                <ScalarProperty Name="MediaFile" ColumnName="MediaFile" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Target">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_Target">
+              <MappingFragment StoreEntitySet="Tbl_Target">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TargetAmount" ColumnName="TargetAmount" />
+                <ScalarProperty Name="MoneyType" ColumnName="MoneyType" />
+                <ScalarProperty Name="TargetDate" ColumnName="TargetDate" />
+                <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+                <ScalarProperty Name="HospitalLocation" ColumnName="HospitalLocation" />
+                <ScalarProperty Name="Ailment" ColumnName="Ailment" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_UpdatesAttachment">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_UpdatesAttachment">
+              <MappingFragment StoreEntitySet="Tbl_UpdatesAttachment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StoryId" ColumnName="StoryId" />
+                <ScalarProperty Name="MediaFile" ColumnName="MediaFile" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="UpdateId" ColumnName="UpdateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_User">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_User">
+              <MappingFragment StoreEntitySet="Tbl_User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsAcLocked" ColumnName="IsAcLocked" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsSpamUser" ColumnName="IsSpamUser" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="CurrentLoginDate" ColumnName="CurrentLoginDate" />
+                <ScalarProperty Name="BasedOut" ColumnName="BasedOut" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_UserAuthentication">
+            <EntityTypeMapping TypeName="GivingActuallyModel.Tbl_UserAuthentication">
+              <MappingFragment StoreEntitySet="Tbl_UserAuthentication">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="SecurityCode" ColumnName="SecurityCode" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetnearestCities" FunctionName="GivingActuallyModel.Store.GetnearestCities" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

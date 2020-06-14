@@ -1,0 +1,58 @@
+﻿@model GivingActually_May.Models.CampaignMainViewModel
+<style>
+    .glyphicon.glyhphicon-menu {
+        font-size: 30px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+</style>
+<div class="row">
+
+    <ul class="media-list">
+        @if (Model.Comments.Any())
+        {
+            int i = 0;
+            foreach (var item in Model.Comments)
+            {
+
+                i = i + 1;
+                <li class="media">
+                    <a href="#" class="pull-left"style="padding-left:0.5em;">
+                        <img alt="" style="height:30px;width:30px " class="img-circle">
+
+                    </a>
+                    <div class="media-body">
+                        <span class="text-muted pull-right" style="padding-right:0.5em;">
+                            <span class="date sub-text">on @item.CommentedDate.ToShortDateString()</span>
+                        </span>
+                        <strong class="text-success"> @item.Users.DisplayName ( @item.Users.UserName)</strong>
+                        <p>
+                            @Html.Raw(@item.CommentMsg)
+                        </p>
+
+
+                        @if (HttpContext.Current.Session["HasSession"] != null && HttpContext.Current.Session["UserRole"] != null && HttpContext.Current.Session["UserRole"].ToString() == GivingActually_May.Models.HelperModels.Helper.RolesEnum.Admin.ToString())
+                        {
+                            <div class="text-center">
+                                @Html.ActionLink("Delete", "DeleteComment", new { id = @item.ComID })
+                            </div>
+                        }
+                    </div>
+                </li>
+                if (i == 3)
+                {
+
+                    <li style="text-align:right ;padding-right:0.5em;">
+                        <a href="#" data-toggle="modal" data-target="#cmntModal">See All</a>
+                    </li>
+                    break;
+                }
+
+
+
+
+            }
+        }
+
+    </ul>
+</div>

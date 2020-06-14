@@ -1,0 +1,67 @@
+﻿@model GivingActually_May.Models.Files
+
+<style>
+    .avatar {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding-top: 1em;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 50%;
+        width: 65px;
+        height: 65px;
+        text-align: center;
+        /* background: #18bc9c;
+        padding: 4px 2px 2px 2px;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);*/
+    }
+
+    .contner {
+        position: relative;
+        font-family: Arial;
+    }
+</style>
+@{
+    var getImage2 = System.Convert.ToBase64String(@Model.File);
+    var Picture2 = string.Format("data:image/JPG;base64 , {0}", getImage2);
+
+
+    if (@Model.ContentType == "video/mp4")
+    {
+        <video class="img_camViewdetail " controls preload="none">
+            <source src="@Url.Content(Picture2)" type="video/mp4" data-target="#myCarousel" data-slide-to="@Model.Index">
+            Your browser does not support the video tag.
+        </video>
+    }
+    else
+    {
+        if ((Model.Index != 3))
+        {
+        <a target="_blank" href="@Url.Content(Picture2)">
+            <img class="img_camViewdetail img-responsive" src="@Url.Content(Picture2)" alt="@Model.FileName" data-target="#myCarousel" data-slide-to="@Model.Index">
+
+        </a>
+            if ((Model.Index ==0))
+            {
+            <meta property="og:image" content="@Url.Content(Picture2)" />
+            }
+        }
+        else
+        {
+            <a target="_blank" href="@Url.Content(Picture2)" data-target="#myCarousel" data-slide-to="2" class="text-center">
+                <div class="contner">
+                    <img src="@Url.Content(Picture2)" alt="@Model.FileName" class="img_camViewdetaillast " data-target="#myCarousel" data-slide-to="@Model.Index">
+                    <div class="avatar" style="align-content:center">
+                        <small>See All</small>
+                    </div>
+                </div>
+            </a>
+
+        }
+
+
+    }
+}

@@ -1,0 +1,784 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7F88E760-CFA0-4D95-ACD2-3CB76C9E4AE2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GivingActually_May</RootNamespace>
+    <AssemblyName>GivingActually_May</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.2.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.2.2.13055\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.2.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.2.2.13055\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.GoogleOAuth2, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.GoogleOAuth2.1.1.1\lib\net40\DotNetOpenAuth.GoogleOAuth2.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.2.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.2.2.13055\lib\net45-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.2.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.2.2.13055\lib\net45-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.2.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.2.2.13055\lib\net45-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.2.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.2.2.13055\lib\net45-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.10-beta\lib\net45\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Membership.OpenAuth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Membership.OpenAuth.2.0.1\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Razorpay, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Razorpay.3.0.0\lib\net45\Razorpay.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.2.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.2.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Context\ApplicationDataContext.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ExternalLoginResult.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DataLayer\City.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\C__MigrationHistory.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\GivingActuallyEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GivingActuallyEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\GivingActuallyEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\GivingActuallyEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GivingActuallyEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_Beneficiary.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_BeneficiaryDetails.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_Campaign.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_CampaignDescription.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_CampaignDescriptionUpdates.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_CampaignDonation.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_CampaignTarget.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_CityDetails.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_Countries.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_GeoLocation.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_Like.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_ParentComment.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_PinCodeDetails.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_States.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_Stories.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_StoriesAttachment.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_Target.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_UpdatesAttachment.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_User.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Tbl_UserAuthentication.cs">
+      <DependentUpon>GivingActuallyEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HelperModels\Authorization.cs" />
+    <Compile Include="Models\HelperModels\Enum.cs" />
+    <Compile Include="Models\HelperModels\UserSession.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\StoriesViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CommonService.cs" />
+    <Compile Include="Services\HelperService.cs" />
+    <Compile Include="Services\ICommonService.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\accordin.css" />
+    <Content Include="Content\campaignview.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
+    <Content Include="css\bootstrap-theme.css" />
+    <Content Include="css\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\modern-business.min.css" />
+    <Content Include="css\modern-business.css" />
+    <Content Include="css\Website.css" />
+    <Content Include="css\Website.min.css" />
+    <Content Include="DataLayer\GivingActuallyEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GivingActuallyEntity.edmx</DependentUpon>
+      <LastGenOutput>GivingActuallyEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataLayer\GivingActuallyEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GivingActuallyEntity.edmx</DependentUpon>
+      <LastGenOutput>GivingActuallyEntity.cs</LastGenOutput>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\approved.jfif" />
+    <Content Include="Images\avator.png" />
+    <Content Include="Images\GivingACtuallyLogo13.png" />
+    <Content Include="Images\placeholder.png" />
+    <Content Include="Images\sailboat.jpg" />
+    <Content Include="Images\spinner.gif" />
+    <Content Include="Images\woods.jpg" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="Scripts\auto-complete.js" />
+    <Content Include="Scripts\Facebook.js" />
+    <None Include="Properties\PublishProfiles\GivingActuallyTest - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Sharer.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\xml.min.js" />
+    <Content Include="Themes\adapters\jquery.js" />
+    <Content Include="Themes\build-config.js" />
+    <Content Include="Themes\ckeditor.js" />
+    <Content Include="Themes\config.js" />
+    <Content Include="Themes\contents.css" />
+    <Content Include="Themes\lang\af.js" />
+    <Content Include="Themes\lang\ar.js" />
+    <Content Include="Themes\lang\az.js" />
+    <Content Include="Themes\lang\bg.js" />
+    <Content Include="Themes\lang\bn.js" />
+    <Content Include="Themes\lang\bs.js" />
+    <Content Include="Themes\lang\ca.js" />
+    <Content Include="Themes\lang\cs.js" />
+    <Content Include="Themes\lang\cy.js" />
+    <Content Include="Themes\lang\da.js" />
+    <Content Include="Themes\lang\de-ch.js" />
+    <Content Include="Themes\lang\de.js" />
+    <Content Include="Themes\lang\el.js" />
+    <Content Include="Themes\lang\en-au.js" />
+    <Content Include="Themes\lang\en-ca.js" />
+    <Content Include="Themes\lang\en-gb.js" />
+    <Content Include="Themes\lang\en.js" />
+    <Content Include="Themes\lang\eo.js" />
+    <Content Include="Themes\lang\es-mx.js" />
+    <Content Include="Themes\lang\es.js" />
+    <Content Include="Themes\lang\et.js" />
+    <Content Include="Themes\lang\eu.js" />
+    <Content Include="Themes\lang\fa.js" />
+    <Content Include="Themes\lang\fi.js" />
+    <Content Include="Themes\lang\fo.js" />
+    <Content Include="Themes\lang\fr-ca.js" />
+    <Content Include="Themes\lang\fr.js" />
+    <Content Include="Themes\lang\gl.js" />
+    <Content Include="Themes\lang\gu.js" />
+    <Content Include="Themes\lang\he.js" />
+    <Content Include="Themes\lang\hi.js" />
+    <Content Include="Themes\lang\hr.js" />
+    <Content Include="Themes\lang\hu.js" />
+    <Content Include="Themes\lang\id.js" />
+    <Content Include="Themes\lang\is.js" />
+    <Content Include="Themes\lang\it.js" />
+    <Content Include="Themes\lang\ja.js" />
+    <Content Include="Themes\lang\ka.js" />
+    <Content Include="Themes\lang\km.js" />
+    <Content Include="Themes\lang\ko.js" />
+    <Content Include="Themes\lang\ku.js" />
+    <Content Include="Themes\lang\lt.js" />
+    <Content Include="Themes\lang\lv.js" />
+    <Content Include="Themes\lang\mk.js" />
+    <Content Include="Themes\lang\mn.js" />
+    <Content Include="Themes\lang\ms.js" />
+    <Content Include="Themes\lang\nb.js" />
+    <Content Include="Themes\lang\nl.js" />
+    <Content Include="Themes\lang\no.js" />
+    <Content Include="Themes\lang\oc.js" />
+    <Content Include="Themes\lang\pl.js" />
+    <Content Include="Themes\lang\pt-br.js" />
+    <Content Include="Themes\lang\pt.js" />
+    <Content Include="Themes\lang\ro.js" />
+    <Content Include="Themes\lang\ru.js" />
+    <Content Include="Themes\lang\si.js" />
+    <Content Include="Themes\lang\sk.js" />
+    <Content Include="Themes\lang\sl.js" />
+    <Content Include="Themes\lang\sq.js" />
+    <Content Include="Themes\lang\sr-latn.js" />
+    <Content Include="Themes\lang\sr.js" />
+    <Content Include="Themes\lang\sv.js" />
+    <Content Include="Themes\lang\th.js" />
+    <Content Include="Themes\lang\tr.js" />
+    <Content Include="Themes\lang\tt.js" />
+    <Content Include="Themes\lang\ug.js" />
+    <Content Include="Themes\lang\uk.js" />
+    <Content Include="Themes\lang\vi.js" />
+    <Content Include="Themes\lang\zh-cn.js" />
+    <Content Include="Themes\lang\zh.js" />
+    <Content Include="Themes\plugins\about\dialogs\about.js" />
+    <Content Include="Themes\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="Themes\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Themes\plugins\balloonpanel\skins\kama\balloonpanel.css" />
+    <Content Include="Themes\plugins\balloonpanel\skins\moono-lisa\balloonpanel.css" />
+    <Content Include="Themes\plugins\balloonpanel\skins\moono-lisa\images\close.png" />
+    <Content Include="Themes\plugins\balloonpanel\skins\moono-lisa\images\hidpi\close.png" />
+    <Content Include="Themes\plugins\balloonpanel\skins\moono\balloonpanel.css" />
+    <Content Include="Themes\plugins\balloonpanel\skins\moono\images\close.png" />
+    <Content Include="Themes\plugins\balloonpanel\skins\moono\images\hidpi\close.png" />
+    <Content Include="Themes\plugins\balloontoolbar\skins\default.css" />
+    <Content Include="Themes\plugins\balloontoolbar\skins\kama\balloontoolbar.css" />
+    <Content Include="Themes\plugins\balloontoolbar\skins\moono-lisa\balloontoolbar.css" />
+    <Content Include="Themes\plugins\balloontoolbar\skins\moono\balloontoolbar.css" />
+    <Content Include="Themes\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Themes\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Themes\plugins\dialog\styles\dialog.css" />
+    <Content Include="Themes\plugins\easyimage\dialogs\easyimagealt.js" />
+    <Content Include="Themes\plugins\easyimage\styles\easyimage.css" />
+    <Content Include="Themes\plugins\icons.png" />
+    <Content Include="Themes\plugins\icons_hidpi.png" />
+    <Content Include="Themes\plugins\imagebase\styles\imagebase.css" />
+    <Content Include="Themes\plugins\link\dialogs\anchor.js" />
+    <Content Include="Themes\plugins\link\dialogs\link.js" />
+    <Content Include="Themes\plugins\link\images\anchor.png" />
+    <Content Include="Themes\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Themes\plugins\widget\images\handle.png" />
+    <Content Include="Themes\plugins\wordcount\css\wordcount.css" />
+    <Content Include="Themes\samples\css\samples.css" />
+    <Content Include="Themes\samples\img\github-top.png" />
+    <Content Include="Themes\samples\img\header-bg.png" />
+    <Content Include="Themes\samples\img\header-separator.png" />
+    <Content Include="Themes\samples\img\logo.png" />
+    <Content Include="Themes\samples\img\logo.svg" />
+    <Content Include="Themes\samples\img\navigation-tip.png" />
+    <Content Include="Themes\samples\index.html" />
+    <Content Include="Themes\samples\js\sample.js" />
+    <Content Include="Themes\samples\js\sf.js" />
+    <Content Include="Themes\samples\old\ajax.html" />
+    <Content Include="Themes\samples\old\api.html" />
+    <Content Include="Themes\samples\old\appendto.html" />
+    <Content Include="Themes\samples\old\assets\inlineall\logo.png" />
+    <Content Include="Themes\samples\old\assets\outputxhtml\outputxhtml.css" />
+    <Content Include="Themes\samples\old\assets\posteddata.php" />
+    <Content Include="Themes\samples\old\assets\sample.jpg" />
+    <Content Include="Themes\samples\old\assets\uilanguages\languages.js" />
+    <Content Include="Themes\samples\old\datafiltering.html" />
+    <Content Include="Themes\samples\old\dialog\assets\my_dialog.js" />
+    <Content Include="Themes\samples\old\dialog\dialog.html" />
+    <Content Include="Themes\samples\old\divreplace.html" />
+    <Content Include="Themes\samples\old\enterkey\enterkey.html" />
+    <Content Include="Themes\samples\old\htmlwriter\assets\outputforflash\outputforflash.swf" />
+    <Content Include="Themes\samples\old\htmlwriter\assets\outputforflash\swfobject.js" />
+    <Content Include="Themes\samples\old\htmlwriter\outputforflash.html" />
+    <Content Include="Themes\samples\old\htmlwriter\outputhtml.html" />
+    <Content Include="Themes\samples\old\index.html" />
+    <Content Include="Themes\samples\old\inlineall.html" />
+    <Content Include="Themes\samples\old\inlinebycode.html" />
+    <Content Include="Themes\samples\old\inlinetextarea.html" />
+    <Content Include="Themes\samples\old\jquery.html" />
+    <Content Include="Themes\samples\old\readonly.html" />
+    <Content Include="Themes\samples\old\replacebyclass.html" />
+    <Content Include="Themes\samples\old\replacebycode.html" />
+    <Content Include="Themes\samples\old\sample.css" />
+    <Content Include="Themes\samples\old\sample.js" />
+    <Content Include="Themes\samples\old\sample_posteddata.php" />
+    <Content Include="Themes\samples\old\tabindex.html" />
+    <Content Include="Themes\samples\old\toolbar\toolbar.html" />
+    <Content Include="Themes\samples\old\uicolor.html" />
+    <Content Include="Themes\samples\old\uilanguages.html" />
+    <Content Include="Themes\samples\old\wordcount\maxParagraphs.html" />
+    <Content Include="Themes\samples\old\wordcount\wordcount.html" />
+    <Content Include="Themes\samples\old\wordcount\wordcountWithMaxCount.html" />
+    <Content Include="Themes\samples\old\wysiwygarea\fullpage.html" />
+    <Content Include="Themes\samples\old\xhtmlstyle.html" />
+    <Content Include="Themes\samples\samples\css\samples.css" />
+    <Content Include="Themes\samples\samples\img\github-top.png" />
+    <Content Include="Themes\samples\samples\img\header-bg.png" />
+    <Content Include="Themes\samples\samples\img\header-separator.png" />
+    <Content Include="Themes\samples\samples\img\logo.png" />
+    <Content Include="Themes\samples\samples\img\logo.svg" />
+    <Content Include="Themes\samples\samples\img\navigation-tip.png" />
+    <Content Include="Themes\samples\samples\index.html" />
+    <Content Include="Themes\samples\samples\js\sample.js" />
+    <Content Include="Themes\samples\samples\js\sf.js" />
+    <Content Include="Themes\samples\samples\old\ajax.html" />
+    <Content Include="Themes\samples\samples\old\api.html" />
+    <Content Include="Themes\samples\samples\old\appendto.html" />
+    <Content Include="Themes\samples\samples\old\assets\inlineall\logo.png" />
+    <Content Include="Themes\samples\samples\old\assets\outputxhtml\outputxhtml.css" />
+    <Content Include="Themes\samples\samples\old\assets\posteddata.php" />
+    <Content Include="Themes\samples\samples\old\assets\sample.jpg" />
+    <Content Include="Themes\samples\samples\old\assets\uilanguages\languages.js" />
+    <Content Include="Themes\samples\samples\old\datafiltering.html" />
+    <Content Include="Themes\samples\samples\old\dialog\assets\my_dialog.js" />
+    <Content Include="Themes\samples\samples\old\dialog\dialog.html" />
+    <Content Include="Themes\samples\samples\old\divreplace.html" />
+    <Content Include="Themes\samples\samples\old\easyimage\easyimage.html" />
+    <Content Include="Themes\samples\samples\old\enterkey\enterkey.html" />
+    <Content Include="Themes\samples\samples\old\index.html" />
+    <Content Include="Themes\samples\samples\old\inlineall.html" />
+    <Content Include="Themes\samples\samples\old\inlinebycode.html" />
+    <Content Include="Themes\samples\samples\old\inlinetextarea.html" />
+    <Content Include="Themes\samples\samples\old\jquery.html" />
+    <Content Include="Themes\samples\samples\old\readonly.html" />
+    <Content Include="Themes\samples\samples\old\replacebyclass.html" />
+    <Content Include="Themes\samples\samples\old\replacebycode.html" />
+    <Content Include="Themes\samples\samples\old\sample.css" />
+    <Content Include="Themes\samples\samples\old\sample.js" />
+    <Content Include="Themes\samples\samples\old\sample_posteddata.php" />
+    <Content Include="Themes\samples\samples\old\tabindex.html" />
+    <Content Include="Themes\samples\samples\old\toolbar\toolbar.html" />
+    <Content Include="Themes\samples\samples\old\uicolor.html" />
+    <Content Include="Themes\samples\samples\old\uilanguages.html" />
+    <Content Include="Themes\samples\samples\old\wysiwygarea\fullpage.html" />
+    <Content Include="Themes\samples\samples\old\xhtmlstyle.html" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\css\fontello.css" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\font\fontello.svg" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\font\LICENSE.txt" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\index.html" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\js\abstracttoolbarmodifier.js" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\js\fulltoolbareditor.js" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\js\toolbarmodifier.js" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\js\toolbartextmodifier.js" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\lib\codemirror\codemirror.css" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\lib\codemirror\codemirror.js" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\lib\codemirror\javascript.js" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\lib\codemirror\neo.css" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\lib\codemirror\show-hint.css" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\lib\codemirror\show-hint.js" />
+    <Content Include="Themes\samples\toolbarconfigurator\css\fontello.css" />
+    <Content Include="Themes\samples\toolbarconfigurator\font\fontello.svg" />
+    <Content Include="Themes\samples\toolbarconfigurator\font\LICENSE.txt" />
+    <Content Include="Themes\samples\toolbarconfigurator\index.html" />
+    <Content Include="Themes\samples\toolbarconfigurator\js\abstracttoolbarmodifier.js" />
+    <Content Include="Themes\samples\toolbarconfigurator\js\fulltoolbareditor.js" />
+    <Content Include="Themes\samples\toolbarconfigurator\js\toolbarmodifier.js" />
+    <Content Include="Themes\samples\toolbarconfigurator\js\toolbartextmodifier.js" />
+    <Content Include="Themes\samples\toolbarconfigurator\lib\codemirror\codemirror.css" />
+    <Content Include="Themes\samples\toolbarconfigurator\lib\codemirror\codemirror.js" />
+    <Content Include="Themes\samples\toolbarconfigurator\lib\codemirror\javascript.js" />
+    <Content Include="Themes\samples\toolbarconfigurator\lib\codemirror\neo.css" />
+    <Content Include="Themes\samples\toolbarconfigurator\lib\codemirror\show-hint.css" />
+    <Content Include="Themes\samples\toolbarconfigurator\lib\codemirror\show-hint.js" />
+    <Content Include="Themes\skins\kama\dialog.css" />
+    <Content Include="Themes\skins\kama\dialog_ie.css" />
+    <Content Include="Themes\skins\kama\dialog_ie7.css" />
+    <Content Include="Themes\skins\kama\dialog_ie8.css" />
+    <Content Include="Themes\skins\kama\dialog_iequirks.css" />
+    <Content Include="Themes\skins\kama\editor.css" />
+    <Content Include="Themes\skins\kama\editor_ie.css" />
+    <Content Include="Themes\skins\kama\editor_ie7.css" />
+    <Content Include="Themes\skins\kama\editor_ie8.css" />
+    <Content Include="Themes\skins\kama\editor_iequirks.css" />
+    <Content Include="Themes\skins\kama\icons.png" />
+    <Content Include="Themes\skins\kama\icons_hidpi.png" />
+    <Content Include="Themes\skins\kama\images\dialog_sides.gif" />
+    <Content Include="Themes\skins\kama\images\dialog_sides.png" />
+    <Content Include="Themes\skins\kama\images\dialog_sides_rtl.png" />
+    <Content Include="Themes\skins\kama\images\mini.gif" />
+    <Content Include="Themes\skins\kama\images\spinner.gif" />
+    <Content Include="Themes\skins\kama\images\sprites.png" />
+    <Content Include="Themes\skins\kama\images\sprites_ie6.png" />
+    <Content Include="Themes\skins\kama\images\toolbar_start.gif" />
+    <Content Include="Themes\skins\moono-lisa\dialog.css" />
+    <Content Include="Themes\skins\moono-lisa\dialog_ie.css" />
+    <Content Include="Themes\skins\moono-lisa\dialog_ie8.css" />
+    <Content Include="Themes\skins\moono-lisa\dialog_iequirks.css" />
+    <Content Include="Themes\skins\moono-lisa\editor.css" />
+    <Content Include="Themes\skins\moono-lisa\editor_gecko.css" />
+    <Content Include="Themes\skins\moono-lisa\editor_ie.css" />
+    <Content Include="Themes\skins\moono-lisa\editor_ie8.css" />
+    <Content Include="Themes\skins\moono-lisa\editor_iequirks.css" />
+    <Content Include="Themes\skins\moono-lisa\icons.png" />
+    <Content Include="Themes\skins\moono-lisa\icons_hidpi.png" />
+    <Content Include="Themes\skins\moono-lisa\images\arrow.png" />
+    <Content Include="Themes\skins\moono-lisa\images\close.png" />
+    <Content Include="Themes\skins\moono-lisa\images\hidpi\close.png" />
+    <Content Include="Themes\skins\moono-lisa\images\hidpi\lock-open.png" />
+    <Content Include="Themes\skins\moono-lisa\images\hidpi\lock.png" />
+    <Content Include="Themes\skins\moono-lisa\images\hidpi\refresh.png" />
+    <Content Include="Themes\skins\moono-lisa\images\lock-open.png" />
+    <Content Include="Themes\skins\moono-lisa\images\lock.png" />
+    <Content Include="Themes\skins\moono-lisa\images\refresh.png" />
+    <Content Include="Themes\skins\moono-lisa\images\spinner.gif" />
+    <Content Include="Themes\styles.js" />
+    <Content Include="Themes\vendor\promise.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Themes\CHANGES.md" />
+    <Content Include="Themes\LICENSE.md" />
+    <Content Include="Themes\README.md" />
+    <Content Include="Themes\samples\old\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\font\config.json" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\font\fontello.eot" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\font\fontello.ttf" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\font\fontello.woff" />
+    <Content Include="Themes\samples\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
+    <Content Include="Themes\samples\toolbarconfigurator\font\config.json" />
+    <Content Include="Themes\samples\toolbarconfigurator\font\fontello.eot" />
+    <Content Include="Themes\samples\toolbarconfigurator\font\fontello.ttf" />
+    <Content Include="Themes\samples\toolbarconfigurator\font\fontello.woff" />
+    <Content Include="Themes\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
+    <Content Include="Themes\skins\kama\readme.md" />
+    <Content Include="Themes\skins\moono-lisa\readme.md" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\AddBeneficiary.cshtml" />
+    <Content Include="Views\User\AddCampaignDescription.cshtml" />
+    <Content Include="Views\User\AddNewCampaign.cshtml" />
+    <Content Include="Views\User\AllCampaigns.cshtml" />
+    <Content Include="Views\User\CampaignView.cshtml" />
+    <Content Include="Views\User\DonateCampaign.cshtml" />
+    <Content Include="Views\User\PayYourDonations.cshtml" />
+    <Content Include="Views\User\PostUpdate.cshtml" />
+    <Content Include="Views\User\uploadPartial.cshtml" />
+    <Content Include="Views\User\_CampaignListView.cshtml" />
+    <Content Include="Views\User\_CampaignListViewin.cshtml" />
+    <Content Include="Views\User\_commentcount.cshtml" />
+    <Content Include="Views\User\_Comments.cshtml" />
+    <Content Include="Views\User\_Donors.cshtml" />
+    <Content Include="Views\User\_DonorsList.cshtml" />
+    <Content Include="Views\User\_fileAttachement.cshtml" />
+    <Content Include="Views\User\_ImageView.cshtml" />
+    <Content Include="Views\User\_ImageView2.cshtml" />
+    <Content Include="Views\User\_ImageViewMain.cshtml" />
+    <Content Include="Views\User\_Like.cshtml" />
+    <Content Include="Views\User\_miniComments.cshtml" />
+    <Content Include="Views\User\_miniDonorsList.cshtml" />
+    <Content Include="Views\User\_pager.cshtml" />
+    <Content Include="Views\User\_ReviewedBy.cshtml" />
+    <Content Include="Views\User\_share.cshtml" />
+    <Content Include="Views\User\_Shares.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\About\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Services\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Contact\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DataLayer\GivingActuallyEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GivingActuallyEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataLayer\GivingActuallyEntity.edmx.diagram">
+      <DependentUpon>GivingActuallyEntity.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\AllCampaigns.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\_CampaignListView.cshtml" />
+    <Content Include="Views\Home\_commentcount.cshtml" />
+    <Content Include="Views\Home\_Comments.cshtml" />
+    <Content Include="Views\Home\_Donors.cshtml" />
+    <Content Include="Views\Home\_DonorsList.cshtml" />
+    <Content Include="Views\Home\_fileAttachement.cshtml" />
+    <Content Include="Views\Home\_ImageView.cshtml" />
+    <Content Include="Views\Home\_ImageView2.cshtml" />
+    <Content Include="Views\Home\_ImageViewMain.cshtml" />
+    <Content Include="Views\Home\_Like.cshtml" />
+    <Content Include="Views\Home\_miniComments.cshtml" />
+    <Content Include="Views\Home\_miniDonorsList.cshtml" />
+    <Content Include="Views\Home\_pager.cshtml" />
+    <Content Include="Views\Home\_ReviewedBy.cshtml" />
+    <Content Include="Views\Home\_share.cshtml" />
+    <Content Include="Views\Home\_Shares.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\CampaignView.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\DonateCampaign.cshtml" />
+    <Content Include="Views\Home\HowItWorks.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\PasswordReset.cshtml" />
+    <Content Include="Views\Home\PayYourDonations.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\SignUp.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\toastr.less" />
+    <Content Include="Content\toastr.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:62932/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

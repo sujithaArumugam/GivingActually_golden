@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Giving Actually - @ViewBag.Title</title>
+    <link href="~/Images/GivingACtuallyLogo13.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap -->
+    <link href="@Url.Content("/css/bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("/css/modern-business.css")" rel="stylesheet">
+    <link href="@Url.Content("/css/Website.min.css")" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+                @if (HttpContext.Current.Session["HasSession"] != null && HttpContext.Current.Session["UserRole"] != null && HttpContext.Current.Session["UserRole"].ToString() == GivingActually_May.Models.HelperModels.Helper.RolesEnum.Admin.ToString())
+                {
+                    <a href='/Admin/Index/' title="Home" class="navbar-brand">
+                        <img src="~/Images/GivingACtuallyLogo13.png" height="40" width="80" style="padding-bottom:0.5em;" />
+                    </a>
+                }
+                else if (HttpContext.Current.Session["HasSession"] != null && HttpContext.Current.Session["UserRole"] != null && HttpContext.Current.Session["UserRole"].ToString() == GivingActually_May.Models.HelperModels.Helper.RolesEnum.User.ToString())
+                {
+                    <a href='/User/Index/' title="Home" class="navbar-brand">
+                        <img src="~/Images/GivingACtuallyLogo13.png" height="40" width="80" style="padding-bottom:0.5em;" />
+                    </a>
+                }
+                else
+                {
+                    <a href='/Home/Index/' title="Home" class="navbar-brand">
+                        <img src="~/Images/GivingACtuallyLogo13.png" width="80" height="40" />
+                    </a>
+                }
+            </div>
+
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+                <ul class="nav navbar-nav navbar-left">
+                    <li id="portfolio" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Donate For <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+
+                            <li><a href='/Home/AllCampaigns/?Category=1'> Agriculture      </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=2'> Animals          </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=3'> Annadhanam       </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=4'> Charity          </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=5'> Education        </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=6'> Elderly Care     </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=7'> Emergency        </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=8'> Funeral          </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=0'> Medical & Illness</a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=9'> Mental Health    </a></li>
+
+                            <li><a href='/Home/AllCampaigns/?Category=10'> Nutrition       </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=11'> Spirituality    </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=12'> Sports          </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=13'> Volunteer       </a></li>
+                            <li><a href='/Home/AllCampaigns/?Category=14'> Wedding         </a></li>
+                        </ul>
+                    </li>
+                    @if (HttpContext.Current.Session["HasSession"] != null && HttpContext.Current.Session["UserRole"] != null && HttpContext.Current.Session["UserRole"].ToString() == GivingActually_May.Models.HelperModels.Helper.RolesEnum.Admin.ToString())
+                    {
+                        <li id="about"><a href='/Admin/AllCampaigns'>Campaigns</a></li>
+                    }
+                    else if (HttpContext.Current.Session["HasSession"] != null && HttpContext.Current.Session["UserRole"] != null && HttpContext.Current.Session["UserRole"].ToString() == GivingActually_May.Models.HelperModels.Helper.RolesEnum.User.ToString())
+                    {
+                        <li id="about"><a href='/User/AllCampaigns'>Campaigns</a></li>
+                    }
+                    else
+                    {
+                        <li id="about"><a href='/Home/AllCampaigns'>Campaigns</a></li>
+                    }
+                    <li id="services">
+                        @Html.ActionLink("Campaigns Near You", "GetStoriesbyLocation", "Home")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("Create Campaign", "AddNewCampaign", "User")
+                    </li>
+
+
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="contact">
+                        @Html.ActionLink("How it Works?", "HowItWorks", "Home")
+                    </li>
+                    @if (HttpContext.Current.Session["UserName"] != null && HttpContext.Current.Session["UserName"].ToString() != "" && HttpContext.Current.Session["UserName"].ToString() != "")
+                    {
+                        <li>
+                            <a href='#' title="Logged in as @HttpContext.Current.Session["UserName"].ToString()">
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href='/Home/Logout/' title="Log Out">
+                                <span class="glyphicon glyphicon-log-out"></span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+
+                        <li>
+                            <a href='/Home/Login/'>
+                                <span class="glyphicon glyphicon-log-in"></span>
+                                Login
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0" style="padding-top:0.5em;">
+                    <input class="form-control mr-sm-2" type="text" id="txtsearch" placeholder="Search a Campaign">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="searchCampaign()">Search</button>
+                </form>
+            </div>
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    @RenderBody()
+
+    <footer>
+        <section id="footer">
+            <div class="container">
+                <div class="row text-center text-xs-center text-sm-left text-md-left">
+                    <div class="row">
+                        <ul class="list-unstyled list-inline  text-center">
+                            <li class="list-inline-item">
+                                <a class="text-white mbr-bold" href="#" target="_blank"> About us  </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-white mbr-bold" href="#" target="_blank">Services  </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-white mbr-bold" href="#" target="_blank">Get In Touch  </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-white mbr-bold" href="#" target="_blank">Careers  </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-white mbr-bold" href="#" target="_blank">Work  </a>
+                            </li>
+                            <li class="list-inline-item"><a href="#" target="_blank"> Privacy </a></li>
+                            <li class="list-inline-item"><a href="#" target="_blank"> Term </a></li>
+                            <li class="list-inline-item"><a href="#" target="_blank"> Legal </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                        <ul class="list-unstyled list-inline social text-center">
+                            <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-google-plus"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.fiverr.com/share/qb8D02" target="_blank"><i class="fa fa-envelope"></i></a></li>
+                        </ul>
+                    </div>
+                    <hr>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                        <p class="text-center font-weight-bold FontColor1">
+                            <img src="~/Images/GivingACtuallyLogo13.png" height="40" wigth="40" />© 2020 GivingActually - All Rights Reserved
+
+
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+    </footer>
+    <!-- /.container -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="@Url.Content("/js/bootstrap.js")"></script>
+</body>
+</html>
